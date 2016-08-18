@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Map, Set, WeakMap, WeakSet</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="node_modules/shower-ribbon/styles/screen-16x10.css">
+    <link rel="stylesheet" href="vendors/prism.css">
+</head>
+<body class="shower list">
+    <header class="caption">
+        <h1>Map, Set, WeakMap, WeakSet</h1>
+        <p>Piotr Kowalski</p>
+    </header>
+
+    <section class="slide">
+        <h2 class="shout">Kontenery w JavaScript,<br/>czyli słów kilka o...</h2>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout">Map, Set, WeakMap, WeakSet</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Kontenery</h2>
+        <ol>
+            <li class="next">Map</li>
+            <li class="next">Set</li>
+            <li class="next">WeakMap</li>
+            <li class="next">WeakSet</li>
+            <li class="next">Array (wszyscy znamy)</li>
+            <li class="next">Object (wszyscy znamy)</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout">Map</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Map</h2>
+        <figure>
+            <blockquote>
+                <p>
+                    Klucze i wartości w kolekcji mogą być dowolnego typu.<br/>
+                    Jeśli wartość zostanie dodana do kolekcji za pomocą istniejącego klucza, nowa wartość zastąpi starą.
+                </p>
+            </blockquote>
+        </figure>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #1
+// ---------------------------------------------------------------------
+var map = new Map()
+map.set(['ie', 'moz'], 'a')
+map.set(['ie', 'moz', 'firefox'], 'b')
+map.set(['ie', 'moz', 'chrome'], 'c')
+
+function check(list, ...browsers) {
+    for (let [key, value] of list)
+        // :) Potrzebujemy referencji, aby inaczej porównywać...
+        if (String(browsers) === String(key)) return value
+}
+
+check(map, 'ie', 'moz', 'firefox') // ???
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #2
+// ---------------------------------------------------------------------
+// Sprawdzenie wielkości kontenera. UWAGA: size to tylko getter.
+map.size // zamiast: array.length
+
+// Wyczyszczenie kontenera
+map.clear() // zamiast: array.length = 0
+
+// Usunięcie elementu o danym indeksie
+map.delete(0) // zamiast: array.splice(0, 1)
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #3
+// ---------------------------------------------------------------------
+// Pobranie wartości pojedynczego klucza
+map.get(key) // zamiast: array[key]
+
+// Sprawdzenie, czy dany klucz jest użyty w kontenerze
+map.has(key) // zamiast: key in array
+
+// Dodanie do kontenera
+map.set() // zamiast: array.push(value)
+
+// UWAGA: Niestety nie można tak:
+map.set(key1, val1, key2, val2) // podobnie jak tutaj: array.push(val1, val2, val3...)
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #4: MAGIA
+// ---------------------------------------------------------------------
+// Pobranie par: klucz, wartość z kontenera {MapIterator}
+map.entries()
+
+// Pobranie listy kluczy z kontenera {MapIterator}
+map.keys() // zamiast: Object.keys(object)
+
+// Pobranie listy wartości z kontenera {MapIterator}
+map.values()
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #5: Zwykła iteracja
+// ---------------------------------------------------------------------
+
+// Iteracja po kontenerze
+map.forEach((value, key) => /* ... */) // to samo co w tablicy
+
+
+
+
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #6: Ciekawostki
+// ---------------------------------------------------------------------
+
+// Rzutowanie na "string"
+String(map) === "[object Map]"
+
+map.set({}, 1) // nie można odwołać się po kluczu
+map.get({}) // undefined
+map.delete({}) // undefined
+
+// Jak w takim razie pozbyć się takiego klucza i wartości?
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #7: Usuwanie wartości z kontenera
+// ---------------------------------------------------------------------
+
+// Wyczyszczenie kontenera, albo iteracja w pętli....
+map.clear()
+
+for (var i of map.entries()) {
+    map.delete(i[0]) // true
+}
+
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #8
+// ---------------------------------------------------------------------
+map.set({ foo: 1 }, 'a')
+map.set({ foo: 2 }, 'b')
+
+var iterator = map.values() // {MapIterator}
+var interval = setInterval(() => {
+    let item = iterator.next()
+    if (item.done) {
+        clearInterval(interval)
+        return
+    }
+    console.log(item.value) // 'a' => [ONE SECOND] => 'b'
+}, 1000)
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #9
+// ---------------------------------------------------------------------
+var map = new Map()
+map.set({ a:1 }, 'a')
+
+var mo = new Map(map.keys())
+
+// Porównanie dwóch map
+(map === mo) // false
+
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #10: WTF?
+// ---------------------------------------------------------------------
+var map = new Map()
+map.set() // Map { undefined => undefined }
+map.size // 1
+
+// W kontenerze typu Array
+var array = []
+array.push()
+array.length // 0
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #11: Święta para
+// ---------------------------------------------------------------------
+var map = new Map()
+
+map.set([1, 2, 3], Math.random())
+map.set([1, 2, 3], Math.random())
+map.set([1, 2, 3], Math.random())
+map.set([1, 2, 3], Math.random())
+
+map.size // 4
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout">Set</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Set</h2>
+        <figure>
+            <blockquote>
+                <p>
+                    Jeśli chcesz dodać nieunikatową wartość do Set, nowa wartość nie zostanie dodana do kolekcji.
+                </p>
+            </blockquote>
+        </figure>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #1: Masowe dodawanie
+// ---------------------------------------------------------------------
+var set = new Set()
+var array = [1, 2, 3, 1, 3, 4, 5, 6, 6, 6, 6]
+
+array.forEach(set.add.bind(set))
+console.log(set) // [1, 2, 3, 4, 5, 6]
+
+// Bez `bind` dostajemy błąd:
+//   TypeError: Method Set.prototype.add called
+//   on incompatible receiver undefined
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #2: Usunięcie duplikatów
+// ---------------------------------------------------------------------
+var a = [1, 2, 3, 1, 3]
+
+// Konstruktor przyjmuje inną kolekcję
+[...new Set(a)] // [1, 2, 3]
+
+var map = new Map()
+map.set({ foo: 1 }, 'a')
+map.set({ foo: 2 }, 'b')
+
+[...new Set(map.keys())] // [{ foo: 1 }, { foo: 2 }]
+[...new Set(map.values())] // ['a', 'b']
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #3: Ojoj
+// ---------------------------------------------------------------------
+
+new Set(1, 2, 3, 4)
+// TypeError: (var)[Symbol.iterator] is not a function
+
+
+
+
+
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #4
+// ---------------------------------------------------------------------
+
+// Usuwanie z kontenera. UWAGA: poprzez wartość, a nie indeks
+var set = new Set([1, 2, 3, 4])
+set.delete(3) // true
+
+set // Set {1, 2, 4}
+
+// albo...
+set.clear() // undefined ... i mamy pustego Set-a
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #5: MAGIA
+// ---------------------------------------------------------------------
+// Pobranie wartości z kontenera {SetIterator}
+set.entries()
+
+// Pobranie listy wartości z kontenera {SetIterator}
+set.keys() // zamiast: Object.keys(object)
+
+// Pobranie listy wartości z kontenera {SetIterator}
+set.values()
+
+// hmmm...
+// set.values() oraz set.keys() zwracają Iterator,
+// który będzie pracować na tych samych danych, jednak
+
+set.values() === set.keys() // false
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #6
+// ---------------------------------------------------------------------
+// Pobranie... czego właściwie?
+set.get(key) // TypeError: set.get is not a function
+
+// Sprawdzenie, czy dany klucz jest użyty w kontenerze
+set.has(key)
+
+// zamiast:
+// (map.indexOf(key) !== 1)
+// (array.includes(key))
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #7
+// ---------------------------------------------------------------------
+
+// Dodanie do kontenera
+map.set() // zamiast: map.push(value)
+
+// UWAGA: Niestety nie można tak:
+map.set(key1, val1, key2, val2)
+
+// podobnie jak tutaj:
+// map.push(val1, val2, val3...)
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #8: Prosta iteracja
+// ---------------------------------------------------------------------
+var set = new Set([1, 1, 2])
+
+set.forEach((i) => {
+    console.log(i) // 1, 2
+})
+
+
+
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #10: Ciekawostki
+// ---------------------------------------------------------------------
+
+// Rzutowanie na "string"
+String(set) === "[object Set]"
+
+
+
+
+
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout">WeakMap</h2>
+    </section>
+
+    <section class="slide">
+        <h2>WeakMap</h2>
+        <figure>
+            <blockquote>
+                <p>
+                    WeakMap nie można wyliczyć obiektów.<br/>
+                    Jeśli wartość zostanie dodana do kolekcji za pomocą istniejącego klucza, nowa wartość zastąpi starą.
+                </p>
+
+                <p>
+                    W obiekcie WeakMap odwołania do obiektów kluczy są przechowywane „słabo”.
+                    Oznacza to, że WeakMap nie zapobiegnie wyrzucaniu elementów bezużytecznych z obiektów kluczowych.
+                    Kiedy nie ma odwołań (innych niż WeakMap) do kluczowych obiektów, wyrzucanie elementów bezużytecznych może objąć obiekty kluczowe.
+                </p>
+            </blockquote>
+        </figure>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #1: Ubogość
+// ---------------------------------------------------------------------
+var weakMap = new WeakMap()
+var key = { foo: 1 }
+
+weakMap.set(1, 4) // TypeError: Invalid value used as weak map key
+weakMap.set([1], 5) // WeakMap { [1] => 5 }
+weakMap.set(key, 6) // WeakMap { [1] => 5, {foo: 1} => 6 }
+
+weakMap.get([1, 2, 3]) // undefined
+weakMap.get(key) // 6
+
+weakMap.has([1]) // false
+weakMap.has(key) // true
+
+weakMap.delete([1]) // false
+weakMap.delete(key) // true
+
+// nie ma więcej metod...
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #2: Ciekawostki
+// ---------------------------------------------------------------------
+
+// Rzutowanie na "string"
+String(new WeakMap) === "[object WeakMap]"
+
+
+
+
+
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #3: Errors
+// ---------------------------------------------------------------------
+new WeakMap(1)
+// TypeError: (var)[Symbol.iterator] is not a function
+
+new WeakMap([1])
+new WeakMap(new Set([1]))
+// TypeError: Iterator value 1 is not an entry object
+
+new WeakMap(new Set([1]).entries())
+// TypeError: Invalid value used as weak map key
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #4: Święta para
+// ---------------------------------------------------------------------
+var weakMap = new WeakMap()
+
+weakMap.set([1, 2, 3], Math.random())
+weakMap.set([1, 2, 3], Math.random()) // ojoj...
+weakMap.set([1, 2, 3], Math.random()) // ojoj...
+
+weakMap.size // 3 (!!!)
+
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #1
+// ---------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #1
+// ---------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout">WeakSet</h2>
+    </section>
+
+    <section class="slide">
+        <h2>WeakSet</h2>
+        <figure>
+            <blockquote>
+                <p>
+                    Jeśli użytkownik spróbuje dodać obiektu nie są unikatowe w celu WeakSet, jak nowy obiekt nie będzie można dodać do kolekcji.
+                </p>
+
+                <p>
+                    W odróżnieniu od Set, tylko obiekty może zostać dodany do kolekcji.Dowolne wartości nie można dodać do kolekcji.
+                </p>
+
+                <p>
+                    W WeakSet obiektu, odwołania do obiektów w zestawie są przechowywane "słabo".
+                    Oznacza to, że WeakSet nie uniemożliwia kolekcję modułowi działo obiektów.
+                    Jeśli istnieją nie odwołania (inne niż WeakSet) z obiektami modułowi zbierającemu może zbierać obiekty.
+                </p>
+
+                <p>
+                    WeakSet (or WeakMap) mogą być pomocne w niektórych scenariuszach obejmujących buforowanie obiektów lub obiektu metadanych.
+                    Na przykład metadanych dla obiektów extensible mogą być przechowywane w WeakSet, lub można utworzyć pamięci podręcznej obrazów użytkownika przy użyciu WeakSet.
+                </p>
+            </blockquote>
+        </figure>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #1
+// ---------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+        </code></pre>
+    </section>
+
+    <p class="badge">
+        <a href="https://github.com/shower/shower">Fork me on GitHub</a>
+    </p>
+    <div class="progress"></div>
+
+    <script src="node_modules/shower-core/shower.min.js"></script>
+    <script src="vendors/prism.js"></script>
+</body>
+</html>
