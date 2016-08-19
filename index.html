@@ -80,10 +80,8 @@ map.size // zamiast: array.length
 // Wyczyszczenie kontenera
 map.clear() // zamiast: array.length = 0
 
-// Usunięcie elementu o danym indeksie
-map.delete(0) // zamiast: array.splice(0, 1)
-
-
+// Usunięcie pary klucz=wartość
+map.delete(key) // zamiast: array.splice(0, 1)
         </code></pre>
     </section>
 
@@ -92,10 +90,10 @@ map.delete(0) // zamiast: array.splice(0, 1)
 // Example #3
 // ---------------------------------------------------------------------
 // Pobranie wartości pojedynczego klucza
-map.get(key) // zamiast: array[key]
+map.get(key) // zamiast: object[key]
 
 // Sprawdzenie, czy dany klucz jest użyty w kontenerze
-map.has(key) // zamiast: key in array
+map.has(key) // zamiast: key in object albo array.indexOf(value) !== -1
 
 // Dodanie do kontenera
 map.set() // zamiast: array.push(value)
@@ -109,14 +107,13 @@ map.set(key1, val1, key2, val2) // podobnie jak tutaj: array.push(val1, val2, va
 // Example #4: MAGIA
 // ---------------------------------------------------------------------
 // Pobranie par: klucz, wartość z kontenera {MapIterator}
-map.entries()
+map.entries() // zamiast: Object.entries(object) - ES2017 (a'ka ES8)
 
 // Pobranie listy kluczy z kontenera {MapIterator}
 map.keys() // zamiast: Object.keys(object)
 
 // Pobranie listy wartości z kontenera {MapIterator}
-map.values()
-
+map.values() // zamiast: Object.values(object) - ES2017 (a'ka ES8)
 
         </code></pre>
     </section>
@@ -142,7 +139,7 @@ map.forEach((value, key) => /* ... */) // to samo co w tablicy
 // Example #6: Ciekawostki
 // ---------------------------------------------------------------------
 // Rzutowanie na "string"
-String(map) === "[object Map]"
+String(new Map) === "[object Map]"
 
 var map = new Map();
 map.set({}, 1) // Blokujemy sobie dostęp do wartości "1"
@@ -152,7 +149,7 @@ map.size // 1
 map.get({}) // undefined
 
 // .. a może uda się usunąć?
-map.delete({}) // undefined
+map.delete({}) // false
 map.size // 1
 
 // Jak w takim razie pozbyć się takiego klucza i wartości?
@@ -167,12 +164,10 @@ map.size // 1
 // Wyczyszczenie całego kontenera pomaga...
 map.clear()
 
-// ... albo usunięcie w pętli.
-for (var i of map.entries()) {
-    map.delete(i[0]) // true
+// ...albo usunięcie w pętli.
+for (var [key, value] of map.entries()) {
+    map.delete(key) // true
 }
-
-
 
         </code></pre>
     </section>
@@ -201,15 +196,14 @@ var interval = setInterval(() => {
 // Example #9
 // ---------------------------------------------------------------------
 var map = new Map()
-map.set({ a:1 }, 'a')
+map.set({ a: 1 }, 'a')
 
-var mo = new Map(map.keys())
+var mo = new Map(map.entries())
 
 // Porównanie dwóch map nie powiedzie się, podobnie jak tablice.
 (map === mo) // false
 
 // Ale miałem nadzieje :)
-
         </code></pre>
     </section>
 
@@ -226,7 +220,6 @@ var array = []
 array.push()
 array.length // 0
 
-
         </code></pre>
     </section>
 
@@ -242,7 +235,6 @@ map.set([1, 2, 3], Math.random())
 map.set([1, 2, 3], Math.random())
 
 map.size // 4
-
 
         </code></pre>
     </section>
@@ -287,10 +279,10 @@ console.log(set) // [1, 2, 3, 4, 5, 6]
         <pre class="cover"><code class="language-javascript">
 // Example #2: Usunięcie duplikatów
 // ---------------------------------------------------------------------
-var a = [1, 2, 3, 1, 3]
+var array = [1, 2, 3, 1, 3]
 
 // Konstruktor przyjmuje inną kolekcję
-[...new Set(a)] // [1, 2, 3]
+[...new Set(array)] // [1, 2, 3]
 
 // -----------------------------------
 
@@ -316,7 +308,6 @@ new Set(1, 2, 3, 4)
 
 
 
-
         </code></pre>
     </section>
 
@@ -331,9 +322,8 @@ set.delete(3) // true
 
 console.log(set) // Set {1, 2, 4}
 
-// albo...
-set.clear() // undefined ... i mamy pustego Set-a
-
+// albo po prostu...
+set.clear() // ...i mamy pustego Set-a
         </code></pre>
     </section>
 
@@ -342,13 +332,13 @@ set.clear() // undefined ... i mamy pustego Set-a
 // Example #5: MAGIA
 // ---------------------------------------------------------------------
 // Pobranie wartości z kontenera {SetIterator}
-set.entries()
+set.entries() // zamiast: Object.entries(object) - ES2017 (a'ka ES8)
 
 // Pobranie listy wartości z kontenera {SetIterator}
 set.keys() // zamiast: Object.keys(object)
 
 // Pobranie listy wartości z kontenera {SetIterator}
-set.values()
+set.values() // zamiast: Object.values(object) - ES2017 (a'ka ES8)
 
 // hmmm...
 // set.values() oraz set.keys() zwracają Iterator,
@@ -366,13 +356,12 @@ set.values() === set.keys() // false
 // Pobranie... a czego właściwie?
 set.get(key) // TypeError: set.get is not a function
 
-// Sprawdzenie, czy dany klucz jest użyty w kontenerze
-let isItemInside = set.has(key)
+// Sprawdzenie, czy dana wartość znajduje się w kontenerze
+set.has(value)
 
 // zamiast:
-let isItemInside = map.indexOf(key) !== 1
-let isItemInside = array.includes(key)
-
+array.indexOf(value) !== -1
+array.includes(value)
         </code></pre>
     </section>
 
@@ -381,14 +370,13 @@ let isItemInside = array.includes(key)
 // Example #7
 // ---------------------------------------------------------------------
 // Dodanie do kontenera
-map.set() // zamiast: map.push(value)
+set.add() // zamiast: array.push(value)
+
 // UWAGA: Niestety nie można w następujący sposób:
-map.set(key1, val1, key2, val2)
+set.add(val1, val2, val3...)
 
 // podobnie jak tutaj:
-// map.push(val1, val2, val3...)
-
-
+array.push(val1, val2, val3...)
 
         </code></pre>
     </section>
@@ -406,7 +394,6 @@ set.forEach((i) => {
 
 
 
-
         </code></pre>
     </section>
 
@@ -416,8 +403,7 @@ set.forEach((i) => {
 // ---------------------------------------------------------------------
 
 // Rzutowanie na "string"
-String(set) === "[object Set]"
-
+String(new Set) === "[object Set]"
 
 
 
@@ -490,7 +476,6 @@ String(new WeakMap) === "[object WeakMap]"
 
 
 
-
         </code></pre>
     </section>
 
@@ -507,8 +492,6 @@ new WeakMap(new Set([1]))
 
 new WeakMap(new Set([1]).entries())
 // TypeError: Invalid value used as weak map key
-
-
         </code></pre>
     </section>
 
@@ -522,7 +505,6 @@ weakMap.set([1, 2, 3], Math.random())
 weakMap.set([1, 2, 3], Math.random()) // ojoj...
 weakMap.set([1, 2, 3], Math.random()) // ojoj...
 
-weakMap.size // 3 (!!!)
 
 
 
@@ -592,7 +574,7 @@ new WeakSet(1, 2, 3);
         <pre class="cover"><code class="language-javascript">
 // Example #2: Proste API
 // ---------------------------------------------------------------------
-// Dodajemy TYLKO obiekty (Array, Function, RegExp, Object)
+// Dodajemy tylko obiekty (Array, Function, RegExp, Object)
 weakSet.add(1) // TypeError: Invalid value used in weak set
 weakSet.add([1]) // WeakSet {[1]}
 
@@ -601,7 +583,6 @@ weakSet.has([1]) // false
 
 // Usuwanie również przez referencję.
 weakSet.delete([1]) // false
-
 console.log(weakSet) // WeakSet {[1]}
         </code></pre>
     </section>
@@ -612,7 +593,7 @@ console.log(weakSet) // WeakSet {[1]}
 // ---------------------------------------------------------------------
 
 // Rzutowanie na "string"
-String(new WeakSet()) === '[object WeakSet]
+String(new WeakSet) === '[object WeakSet]'
 
 
 
@@ -630,14 +611,14 @@ String(new WeakSet()) === '[object WeakSet]
 var o = { foo: 1 }
 var advanced = [ o, { foo: 2 }, { foo: 3 }, o ];
 
-[...new Set(advanced)] // Array[4]
+[...new Set(advanced)] // Array[3]
 [...new WeakSet(advanced)]
 // TypeError: (intermediate value)[Symbol.iterator] is not a function
 
 var weakSet = new WeakSet();
 advanced.forEach(weakSet.add.bind(weakSet))
 // WeakSet {Object {foo: 1}, Object {foo: 2}, Object {foo: 3}}
-// ... ale to już Set zapewnia
+// ...ale to już Set zapewnia
         </code></pre>
     </section>
 
