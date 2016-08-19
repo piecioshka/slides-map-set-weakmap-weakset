@@ -1,6 +1,8 @@
 {
-  "private": true,
-  "dependencies": {
-    "shower": "^2.1.4"
-  }
+    "private": true,
+    "name": "slides-map-set-weakmap-weakset",
+    "version": "1.0.0",
+    "dependencies": {
+        "shower": "^2.1.4"
+    }
 }
