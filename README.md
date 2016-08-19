@@ -1,6 +1,8 @@
 # slides-map-set-weakmap-weakset
 
-## Czego użyłem?
+> :clipboard: Slides for presentation about JavaScript (ES2016) data holders: Map, Set, WeakMap i WeakSet. 
+
+## What am I used?
 
 ### Language specification
 
@@ -20,6 +22,6 @@
 
 * Prism.js: http://prismjs.com/download.html
 
-## Licencja
+## License
 
 [The MIT License](http://piecioshka.mit-license.org) @ 2016
