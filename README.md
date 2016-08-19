@@ -6,10 +6,10 @@
 
 ### Language specification
 
-* Map: https://msdn.microsoft.com/pl-pl/library/dn263029(v=vs.94).aspx
-* Set: https://msdn.microsoft.com/pl-pl/library/dn251547(v=vs.94).aspx
-* WeakMap: https://msdn.microsoft.com/pl-pl/library/dn251546(v=vs.94).aspx
-* WeakSet: https://msdn.microsoft.com/pl-pl/library/dn911720(v=vs.94).aspx
+* Map: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
+* Set: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
+* WeakMap: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap
+* WeakSet: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet
 
 ## Compatibility table
 

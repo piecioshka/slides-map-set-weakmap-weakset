@@ -15,7 +15,7 @@
     </header>
 
     <section class="slide">
-        <h2 class="shout">Kontenery w JavaScript,<br/>czyli słów kilka o...</h2>
+        <h2 class="shout">Data holders in JavaScript,<br/>a few words about...</h2>
     </section>
 
     <section class="slide">
@@ -23,14 +23,14 @@
     </section>
 
     <section class="slide">
-        <h2>Kontenery</h2>
+        <h2>Data Holders</h2>
         <ol>
-            <li class="next">Map</li>
-            <li class="next">Set</li>
-            <li class="next">WeakMap</li>
-            <li class="next">WeakSet</li>
-            <li class="next">Array (wszyscy znamy)</li>
-            <li class="next">Object (wszyscy znamy)</li>
+            <li class="next"><code>Map</code></li>
+            <li class="next"><code>Set</code></li>
+            <li class="next"><code>WeakMap</code></li>
+            <li class="next"><code>WeakSet</code></li>
+            <li class="next"><code>Array</code> (well known)</li>
+            <li class="next"><code>Object</code> (well known)</li>
         </ol>
     </section>
 
@@ -43,28 +43,26 @@
         <figure>
             <blockquote>
                 <p>
-                    Klucze i wartości w kolekcji mogą być dowolnego typu.<br/>
-                    Jeśli wartość zostanie dodana do kolekcji za pomocą istniejącego klucza, nowa wartość zastąpi starą.
+                    The Map object is a simple key/value map.<br/>
+                    Any value (both objects and primitive values) may be used as either a key or a value.
                 </p>
             </blockquote>
+            <figcaption>MDN @ 2016</figcaption>
         </figure>
     </section>
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #1
+// Example #1: Real world
 // ---------------------------------------------------------------------
 var map = new Map()
 map.set(['ie', 'moz'], 'a')
 map.set(['ie', 'moz', 'firefox'], 'b')
-map.set(['ie', 'moz', 'chrome'], 'c')
 
 function check(list, ...browsers) {
     for (let [key, value] of list)
-        // :) Potrzebujemy referencji, aby inaczej porównywać...
         if (String(browsers) === String(key)) return value
 }
-
 check(map, 'ie', 'moz', 'firefox') // ???
         </code></pre>
     </section>
@@ -75,13 +73,13 @@ check(map, 'ie', 'moz', 'firefox') // ???
 // ---------------------------------------------------------------------
 // Sprawdzenie wielkości kontenera.
 // UWAGA: Właściwość `size` to tylko getter.
-map.size // zamiast: array.length
+map.size // instead of: array.length
 
 // Wyczyszczenie kontenera
-map.clear() // zamiast: array.length = 0
+map.clear() // instead of: array.length = 0
 
 // Usunięcie pary klucz=wartość
-map.delete(key) // zamiast: array.splice(0, 1)
+map.delete(key) // instead of: array.splice(0, 1)
         </code></pre>
     </section>
 
@@ -90,13 +88,13 @@ map.delete(key) // zamiast: array.splice(0, 1)
 // Example #3
 // ---------------------------------------------------------------------
 // Pobranie wartości pojedynczego klucza
-map.get(key) // zamiast: object[key]
+map.get(key) // instead of: object[key]
 
 // Sprawdzenie, czy dany klucz jest użyty w kontenerze
-map.has(key) // zamiast: key in object albo array.indexOf(value) !== -1
+map.has(key) // instead of: key in object albo array.indexOf(value) !== -1
 
 // Dodanie do kontenera
-map.set() // zamiast: array.push(value)
+map.set() // instead of: array.push(value)
 // UWAGA: Niestety nie można w następujący sposób:
 map.set(key1, val1, key2, val2) // podobnie jak tutaj: array.push(val1, val2, val3...)
         </code></pre>
@@ -107,13 +105,13 @@ map.set(key1, val1, key2, val2) // podobnie jak tutaj: array.push(val1, val2, va
 // Example #4: MAGIA
 // ---------------------------------------------------------------------
 // Pobranie par: klucz, wartość z kontenera {MapIterator}
-map.entries() // zamiast: Object.entries(object) - ES2017 (a'ka ES8)
+map.entries() // instead of: Object.entries(object) - ES2017 (a'ka ES8)
 
 // Pobranie listy kluczy z kontenera {MapIterator}
-map.keys() // zamiast: Object.keys(object)
+map.keys() // instead of: Object.keys(object)
 
 // Pobranie listy wartości z kontenera {MapIterator}
-map.values() // zamiast: Object.values(object) - ES2017 (a'ka ES8)
+map.values() // instead of: Object.values(object) - ES2017 (a'ka ES8)
 
         </code></pre>
     </section>
@@ -136,11 +134,24 @@ map.forEach((value, key) => /* ... */) // to samo co w tablicy
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #6: Ciekawostki
+// Example #6: Casting
 // ---------------------------------------------------------------------
 // Rzutowanie na "string"
 String(new Map) === "[object Map]"
 
+
+
+
+
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #7
+// ---------------------------------------------------------------------
 var map = new Map();
 map.set({}, 1) // Blokujemy sobie dostęp do wartości "1"
 map.size // 1
@@ -158,7 +169,7 @@ map.size // 1
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #7: Usuwanie wartości z kontenera
+// Example #8: Usuwanie wartości z kontenera
 // ---------------------------------------------------------------------
 
 // Wyczyszczenie całego kontenera pomaga...
@@ -174,7 +185,7 @@ for (var [key, value] of map.entries()) {
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #8
+// Example #9
 // ---------------------------------------------------------------------
 map.set({ foo: 1 }, 'a')
 map.set({ foo: 2 }, 'b')
@@ -193,7 +204,7 @@ var interval = setInterval(() => {
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #9
+// Example #10
 // ---------------------------------------------------------------------
 var map = new Map()
 map.set({ a: 1 }, 'a')
@@ -209,7 +220,7 @@ var mo = new Map(map.entries())
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #10: WTF?
+// Example #11: WTF?
 // ---------------------------------------------------------------------
 var map = new Map()
 map.set() // Map { undefined => undefined }
@@ -225,7 +236,7 @@ array.length // 0
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #11: Para jest "święta" = { key, value }
+// Example #12: "Holy" couple = { key, value }
 // ---------------------------------------------------------------------
 var map = new Map()
 
@@ -240,7 +251,7 @@ map.size // 4
     </section>
 
     <section class="slide">
-        <h2 class="shout">To w czym Map jest taki fajny?</h2>
+        <h2 class="shout">Therefore, why Map is cool?</h2>
     </section>
 
     <section class="slide">
@@ -252,9 +263,10 @@ map.size // 4
         <figure>
             <blockquote>
                 <p>
-                    Jeśli chcesz dodać nieunikatową wartość do Set, nowa wartość nie zostanie dodana do kolekcji.
+                    The Set object lets you store unique values of any type, whether primitive values or object references.
                 </p>
             </blockquote>
+            <figcaption>MDN @ 2016</figcaption>
         </figure>
     </section>
 
@@ -332,13 +344,13 @@ set.clear() // ...i mamy pustego Set-a
 // Example #5: MAGIA
 // ---------------------------------------------------------------------
 // Pobranie wartości z kontenera {SetIterator}
-set.entries() // zamiast: Object.entries(object) - ES2017 (a'ka ES8)
+set.entries() // instead of: Object.entries(object) - ES2017 (a'ka ES8)
 
 // Pobranie listy wartości z kontenera {SetIterator}
-set.keys() // zamiast: Object.keys(object)
+set.keys() // instead of: Object.keys(object)
 
 // Pobranie listy wartości z kontenera {SetIterator}
-set.values() // zamiast: Object.values(object) - ES2017 (a'ka ES8)
+set.values() // instead of: Object.values(object) - ES2017 (a'ka ES8)
 
 // hmmm...
 // set.values() oraz set.keys() zwracają Iterator,
@@ -359,7 +371,7 @@ set.get(key) // TypeError: set.get is not a function
 // Sprawdzenie, czy dana wartość znajduje się w kontenerze
 set.has(value)
 
-// zamiast:
+// instead of:
 array.indexOf(value) !== -1
 array.includes(value)
         </code></pre>
@@ -370,7 +382,7 @@ array.includes(value)
 // Example #7
 // ---------------------------------------------------------------------
 // Dodanie do kontenera
-set.add() // zamiast: array.push(value)
+set.add() // instead of: array.push(value)
 
 // UWAGA: Niestety nie można w następujący sposób:
 set.add(val1, val2, val3...)
@@ -399,7 +411,7 @@ set.forEach((i) => {
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #10: Ciekawostki
+// Example #10: Casting
 // ---------------------------------------------------------------------
 
 // Rzutowanie na "string"
@@ -414,7 +426,7 @@ String(new Set) === "[object Set]"
     </section>
 
     <section class="slide">
-        <h2 class="shout">To w czym Set jest taki fajny?</h2>
+        <h2 class="shout">Therefore, why Set is cool?</h2>
     </section>
 
     <section class="slide">
@@ -426,16 +438,11 @@ String(new Set) === "[object Set]"
         <figure>
             <blockquote>
                 <p>
-                    WeakMap nie można wyliczyć obiektów.<br/>
-                    Jeśli wartość zostanie dodana do kolekcji za pomocą istniejącego klucza, nowa wartość zastąpi starą.
-                </p>
-
-                <p>
-                    W obiekcie WeakMap odwołania do obiektów kluczy są przechowywane „słabo”.
-                    Oznacza to, że WeakMap nie zapobiegnie wyrzucaniu elementów bezużytecznych z obiektów kluczowych.
-                    Kiedy nie ma odwołań (innych niż WeakMap) do kluczowych obiektów, wyrzucanie elementów bezużytecznych może objąć obiekty kluczowe.
+                    The WeakMap object is a collection of key/value pairs in which the keys are weakly referenced.<br/>
+                    The keys must be objects and the values can be arbitrary values.
                 </p>
             </blockquote>
+            <figcaption>MDN @ 2016</figcaption>
         </figure>
     </section>
 
@@ -465,7 +472,7 @@ weakMap.delete(key) // true
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #2: Ciekawostki
+// Example #2: Casting
 // ---------------------------------------------------------------------
 
 // Rzutowanie na "string"
@@ -497,7 +504,7 @@ new WeakMap(new Set([1]).entries())
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #4: Para jest "święta" = { key, value }
+// Example #4: "Holy" couple = { key, value }
 // ---------------------------------------------------------------------
 var weakMap = new WeakMap()
 
@@ -512,7 +519,7 @@ weakMap.set([1, 2, 3], Math.random()) // ojoj...
     </section>
 
     <section class="slide">
-        <h2 class="shout">To w czym WeakMap jest taki fajny?</h2>
+        <h2 class="shout">Therefore, why WeakMap is cool?</h2>
     </section>
 
     <section class="slide">
@@ -524,32 +531,10 @@ weakMap.set([1, 2, 3], Math.random()) // ojoj...
         <figure>
             <blockquote>
                 <p>
-                    Jeśli użytkownik spróbuje dodać obiektu nie są unikatowe w celu WeakSet, jak nowy obiekt nie będzie można dodać do kolekcji.
-                </p>
-
-                <p>
-                    W odróżnieniu od Set, tylko obiekty może zostać dodany do kolekcji.<br/>
-                    Dowolne wartości nie można dodać do kolekcji.
+                    The WeakSet object lets you store weakly held objects in a collection.
                 </p>
             </blockquote>
-        </figure>
-    </section>
-
-    <section class="slide">
-        <h2>WeakSet, part 2</h2>
-        <figure>
-            <blockquote>
-                <p>
-                    W WeakSet obiektu, odwołania do obiektów w zestawie są przechowywane "słabo".
-                    Oznacza to, że WeakSet nie uniemożliwia kolekcję modułowi działo obiektów.
-                    Jeśli istnieją nie odwołania (inne niż WeakSet) z obiektami modułowi zbierającemu może zbierać obiekty.
-                </p>
-
-                <p>
-                    WeakSet (or WeakMap) mogą być pomocne w niektórych scenariuszach obejmujących buforowanie obiektów lub obiektu metadanych.
-                    Na przykład metadanych dla obiektów extensible mogą być przechowywane w WeakSet, lub można utworzyć pamięci podręcznej obrazów użytkownika przy użyciu WeakSet.
-                </p>
-            </blockquote>
+            <figcaption>MDN @ 2016</figcaption>
         </figure>
     </section>
 
@@ -623,7 +608,7 @@ advanced.forEach(weakSet.add.bind(weakSet))
     </section>
 
     <section class="slide">
-        <h2 class="shout">To w czym WeakSet jest taki fajny?</h2>
+        <h2 class="shout">Therefore, why WeakSet is cool?</h2>
     </section>
 
     <section class="slide">
@@ -634,7 +619,7 @@ advanced.forEach(weakSet.add.bind(weakSet))
             <li>dodać przykłady wykorzystania WeakSet i WeakMap</li>
         </ul>
 
-        <p class="note">Dziękuję. To ostatni slajd.</p>
+        <p class="note">This is last slide. Thanks!</p>
     </section>
 
     <p class="badge">
