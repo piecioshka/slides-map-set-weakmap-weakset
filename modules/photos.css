@@ -1,0 +1,59 @@
+.slide.photo {
+    position: relative;
+    background: #000;
+    overflow: hidden;
+}
+
+.slide.photo code {
+    background: rgba(0, 0, 0, .5);
+}
+
+.slide.photo h2 {
+    color: #fff;
+}
+
+.slide.photo li,
+.slide.photo p.note {
+    position: relative;
+    color: #eee;
+}
+
+.slide.photo::before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    opacity: 0.6;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/*bridge.jpg*/
+/*fire.jpg*/
+/*fishing-rod.jpg*/
+/*flower.jpg*/
+/*grain.jpg*/
+/*hand.jpg*/
+/*hay.jpg*/
+/*pebbles.jpg*/
+/*plants.jpg*/
+/*sky.jpg*/
+/*still-life.jpg*/
+/*sunset-2.jpg*/
+/*sunset.jpg*/
+/*tree.jpg*/
+/*trees.jpg*/
+/*view.jpg*/
+
+.photo-1::before { background-image: url("../photos/bridge.jpg"); }
+.photo-2::before { background-image: url("../photos/fire.jpg"); }
+.photo-3::before { background-image: url("../photos/fishing-rod.jpg"); }
+.photo-4::before { background-image: url("../photos/flower.jpg"); }
+.photo-5::before { background-image: url("../photos/grain.jpg"); }
+.photo-6::before { background-image: url("../photos/hand.jpg"); }
+.photo-7::before { background-image: url("../photos/hay.jpg"); }
+.photo-8::before { background-image: url("../photos/pebbles.jpg"); }
