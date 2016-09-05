@@ -7,48 +7,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://npmcdn.com/shower-ribbon/styles/screen-16x10.css">
     <link rel="stylesheet" href="vendors/prism.css">
+    <link rel="stylesheet" href="modules/custom-prism.css">
 </head>
 <body class="shower list">
     <header class="caption">
         <h1>Map, Set, WeakMap, WeakSet</h1>
-        <p>Piotr Kowalski</p>
+        <p>Piotr Kowalski @piecioshka</p>
     </header>
 
     <section class="slide">
-        <h2 class="shout">Data holders in JavaScript,<br/>a few words about...</h2>
+        <h2 class="shout" style="font-size: 120px;">New collections in JS (from ECMAScript 2015): Map, Set, WeakMap, WeakSet</h2>
     </section>
 
     <section class="slide">
-        <h2 class="shout">Map, Set, WeakMap, WeakSet</h2>
-    </section>
-
-    <section class="slide">
-        <h2>Data Holders</h2>
+        <h2>Collections in JavaScript</h2>
         <ol>
-            <li class="next"><code>Map</code></li>
-            <li class="next"><code>Set</code></li>
-            <li class="next"><code>WeakMap</code></li>
-            <li class="next"><code>WeakSet</code></li>
             <li class="next"><code>Array</code> (well known)</li>
             <li class="next"><code>Object</code> (well known)</li>
+            <li class="next"><code>Map</code> &#x2728;</li>
+            <li class="next"><code>Set</code> &#x2728;</li>
+            <li class="next"><code>WeakMap</code> &#x2728;</li>
+            <li class="next"><code>WeakSet</code> &#x2728;</li>
         </ol>
     </section>
 
     <section class="slide">
-        <h2 class="shout">Map</h2>
-    </section>
-
-    <section class="slide">
-        <h2>Map</h2>
-        <figure>
-            <blockquote>
-                <p>
-                    The Map object is a simple key/value map.<br/>
-                    Any value (both objects and primitive values) may be used as either a key or a value.
-                </p>
-            </blockquote>
-            <figcaption>MDN @ 2016</figcaption>
-        </figure>
+        <h2 class="shout"><code>Map</code></h2>
+        <p class="note">
+            The Map object is a simple key/value map.
+            Any value (both objects and primitive values) may be used as either a key or a value.
+            <strong>MDN @ 2016</strong>
+        </p>
     </section>
 
     <section class="slide">
@@ -251,23 +240,15 @@ map.size // 4
     </section>
 
     <section class="slide">
-        <h2 class="shout">Therefore, why Map is cool?</h2>
+        <h2 class="shout">So, why <code>Map</code> is cool?</h2>
     </section>
 
     <section class="slide">
-        <h2 class="shout">Set</h2>
-    </section>
-
-    <section class="slide">
-        <h2>Set</h2>
-        <figure>
-            <blockquote>
-                <p>
-                    The Set object lets you store unique values of any type, whether primitive values or object references.
-                </p>
-            </blockquote>
-            <figcaption>MDN @ 2016</figcaption>
-        </figure>
+        <h2 class="shout"><code>Set</code></h2>
+        <p class="note">
+            The Set object lets you store unique values of any type, whether primitive values or object references.
+            <strong>MDN @ 2016</strong>
+        </p>
     </section>
 
     <section class="slide">
@@ -426,24 +407,16 @@ String(new Set) === "[object Set]"
     </section>
 
     <section class="slide">
-        <h2 class="shout">Therefore, why Set is cool?</h2>
+        <h2 class="shout">So, why <code>Set</code> is cool?</h2>
     </section>
 
     <section class="slide">
-        <h2 class="shout">WeakMap</h2>
-    </section>
-
-    <section class="slide">
-        <h2>WeakMap</h2>
-        <figure>
-            <blockquote>
-                <p>
-                    The WeakMap object is a collection of key/value pairs in which the keys are weakly referenced.<br/>
-                    The keys must be objects and the values can be arbitrary values.
-                </p>
-            </blockquote>
-            <figcaption>MDN @ 2016</figcaption>
-        </figure>
+        <h2 class="shout"><code>WeakMap</code></h2>
+        <p class="note">
+            The WeakMap object is a collection of key/value pairs in which the keys are weakly referenced.
+            The keys must be objects and the values can be arbitrary values.
+            <strong>MDN @ 2016</strong>
+        </p>
     </section>
 
     <section class="slide">
@@ -519,23 +492,15 @@ weakMap.set([1, 2, 3], Math.random()) // ojoj...
     </section>
 
     <section class="slide">
-        <h2 class="shout">Therefore, why WeakMap is cool?</h2>
+        <h2 class="shout">So, why <code>WeakMap</code> is cool?</h2>
     </section>
 
     <section class="slide">
-        <h2 class="shout">WeakSet</h2>
-    </section>
-
-    <section class="slide">
-        <h2>WeakSet</h2>
-        <figure>
-            <blockquote>
-                <p>
-                    The WeakSet object lets you store weakly held objects in a collection.
-                </p>
-            </blockquote>
-            <figcaption>MDN @ 2016</figcaption>
-        </figure>
+        <h2 class="shout"><code>WeakSet</code></h2>
+        <p class="note">
+            The WeakSet object lets you store weakly held objects in a collection.
+            <strong>MDN @ 2016</strong>
+        </p>
     </section>
 
     <section class="slide">
@@ -608,7 +573,7 @@ advanced.forEach(weakSet.add.bind(weakSet))
     </section>
 
     <section class="slide">
-        <h2 class="shout">Therefore, why WeakSet is cool?</h2>
+        <h2 class="shout">So, why <code>WeakSet</code> is cool?</h2>
     </section>
 
     <section class="slide">
@@ -616,7 +581,8 @@ advanced.forEach(weakSet.add.bind(weakSet))
         <ul>
             <li>weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kontenerach</li>
             <li>przebadać WeakMap oraz WeakSet pod kątem Memory Leak (prawdopodobnie klucze są usuwane przez GC)</li>
-            <li>dodać przykłady wykorzystania WeakSet i WeakMap</li>
+            <li>dodać przykłady wykorzystania WeakSet i WeakMap (korzystając z przykładów podczas tworzenie definicji dla specyfikacji)</li>
+            <li>dodać interesujące tła</li>
         </ul>
 
         <p class="note">This is last slide. Thanks!</p>
