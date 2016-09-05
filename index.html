@@ -16,7 +16,10 @@
     </header>
 
     <section class="slide">
-        <h2 class="shout" style="font-size: 120px;">New collections in JS (from ECMAScript 2015): Map, Set, WeakMap, WeakSet</h2>
+        <h2 style="font-size: 100px;">New collections in JS: Map, Set, WeakMap, WeakSet</h2>
+        <p class="note">
+            From <code>ECMAScript 2015</code> specification.
+        </p>
     </section>
 
     <section class="slide">
@@ -42,7 +45,7 @@
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #1: Real world
+// Example #1: Real example
 // ---------------------------------------------------------------------
 var map = new Map()
 map.set(['ie', 'moz'], 'a')
@@ -60,14 +63,14 @@ check(map, 'ie', 'moz', 'firefox') // ???
         <pre class="cover"><code class="language-javascript">
 // Example #2
 // ---------------------------------------------------------------------
-// Sprawdzenie wielkości kontenera.
-// UWAGA: Właściwość `size` to tylko getter.
+// Check collection length.
+// WARNING: Property `size` is a getter.
 map.size // instead of: array.length
 
-// Wyczyszczenie kontenera
+// Clear collection
 map.clear() // instead of: array.length = 0
 
-// Usunięcie pary klucz=wartość
+// Remove pair key/value
 map.delete(key) // instead of: array.splice(0, 1)
         </code></pre>
     </section>
@@ -76,30 +79,44 @@ map.delete(key) // instead of: array.splice(0, 1)
         <pre class="cover"><code class="language-javascript">
 // Example #3
 // ---------------------------------------------------------------------
-// Pobranie wartości pojedynczego klucza
+// Get value from key
 map.get(key) // instead of: object[key]
 
-// Sprawdzenie, czy dany klucz jest użyty w kontenerze
-map.has(key) // instead of: key in object albo array.indexOf(value) !== -1
+// Check, if key is used in collection
+map.has(key)
 
-// Dodanie do kontenera
-map.set() // instead of: array.push(value)
-// UWAGA: Niestety nie można w następujący sposób:
-map.set(key1, val1, key2, val2) // podobnie jak tutaj: array.push(val1, val2, val3...)
+// instead of:
+key in object
+array.indexOf(value) !== -1
         </code></pre>
     </section>
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #4: MAGIA
+// Example #4
 // ---------------------------------------------------------------------
-// Pobranie par: klucz, wartość z kontenera {MapIterator}
+// Add to collection
+map.set() // instead of: array.push(value)
+
+// WARNING: Unfortunately, that approach is not valid
+map.set(key1, val1, key2, val2) // similar like this: array.push(val1, val2, val3...)
+
+
+
+        </code></pre>
+    </section>
+
+    <section class="slide">
+        <pre class="cover"><code class="language-javascript">
+// Example #5: MAGIC
+// ---------------------------------------------------------------------
+// Get pair key/value form collection {MapIterator}
 map.entries() // instead of: Object.entries(object) - ES2017 (a'ka ES8)
 
-// Pobranie listy kluczy z kontenera {MapIterator}
+// Get keys from collection {MapIterator}
 map.keys() // instead of: Object.keys(object)
 
-// Pobranie listy wartości z kontenera {MapIterator}
+// Get values from collection {MapIterator}
 map.values() // instead of: Object.values(object) - ES2017 (a'ka ES8)
 
         </code></pre>
@@ -107,11 +124,11 @@ map.values() // instead of: Object.values(object) - ES2017 (a'ka ES8)
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #5: Zwykła iteracja
+// Example #6: Simple iteration
 // ---------------------------------------------------------------------
 
-// Iteracja po kontenerze
-map.forEach((value, key) => /* ... */) // to samo co w tablicy
+// Iteration through collection
+map.forEach((value, key) => /* ... */) // the same with arrays
 
 
 
@@ -123,9 +140,9 @@ map.forEach((value, key) => /* ... */) // to samo co w tablicy
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #6: Casting
+// Example #7: Casting
 // ---------------------------------------------------------------------
-// Rzutowanie na "string"
+// Cast to "string"
 String(new Map) === "[object Map]"
 
 
@@ -139,32 +156,32 @@ String(new Map) === "[object Map]"
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #7
+// Example #8
 // ---------------------------------------------------------------------
 var map = new Map();
-map.set({}, 1) // Blokujemy sobie dostęp do wartości "1"
+map.set({}, 1) // Block access to value "1"
 map.size // 1
 
-// Spróbujmy jednak pobrać...
+// But let's try to get...
 map.get({}) // undefined
 
-// .. a może uda się usunąć?
+// ...or maybe we can remove it?
 map.delete({}) // false
 map.size // 1
 
-// Jak w takim razie pozbyć się takiego klucza i wartości?
+// So, how can you remove that's key/value?
         </code></pre>
     </section>
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #8: Usuwanie wartości z kontenera
+// Example #9: Remove value from collection
 // ---------------------------------------------------------------------
 
-// Wyczyszczenie całego kontenera pomaga...
+// Clear whole collection helps...
 map.clear()
 
-// ...albo usunięcie w pętli.
+// ...or remove in loop.
 for (var [key, value] of map.entries()) {
     map.delete(key) // true
 }
@@ -174,7 +191,7 @@ for (var [key, value] of map.entries()) {
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #9
+// Example #10
 // ---------------------------------------------------------------------
 map.set({ foo: 1 }, 'a')
 map.set({ foo: 2 }, 'b')
@@ -193,29 +210,29 @@ var interval = setInterval(() => {
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #10
+// Example #11
 // ---------------------------------------------------------------------
 var map = new Map()
 map.set({ a: 1 }, 'a')
 
 var mo = new Map(map.entries())
 
-// Porównanie dwóch map nie powiedzie się, podobnie jak tablice.
+// Comparison of 2 maps will fail, just as arrays.
 (map === mo) // false
 
-// Ale miałem nadzieje :)
+// But I had hope :)
         </code></pre>
     </section>
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #11: WTF?
+// Example #12: WTF?
 // ---------------------------------------------------------------------
 var map = new Map()
 map.set() // Map { undefined => undefined }
 map.size // 1
 
-// W kontenerze typu Array
+// In arrays
 var array = []
 array.push()
 array.length // 0
@@ -225,7 +242,7 @@ array.length // 0
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #12: "Holy" couple = { key, value }
+// Example #13: "Holy" couple key/value
 // ---------------------------------------------------------------------
 var map = new Map()
 
@@ -253,7 +270,7 @@ map.size // 4
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #1: Masowe dodawanie
+// Example #1: Mass addition
 // ---------------------------------------------------------------------
 var set = new Set()
 var array = [1, 2, 3, 1, 3, 4, 5, 6, 6, 6, 6]
@@ -261,20 +278,19 @@ var array = [1, 2, 3, 1, 3, 4, 5, 6, 6, 6, 6]
 array.forEach(set.add.bind(set))
 console.log(set) // [1, 2, 3, 4, 5, 6]
 
-// Bez `bind` dostajemy błąd:
+// Without `bind` some error occur:
 //   TypeError: Method Set.prototype.add called
 //   on incompatible receiver undefined
-
         </code></pre>
     </section>
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #2: Usunięcie duplikatów
+// Example #2: Remove duplications
 // ---------------------------------------------------------------------
 var array = [1, 2, 3, 1, 3]
 
-// Konstruktor przyjmuje inną kolekcję
+// Constructor expect another collection
 [...new Set(array)] // [1, 2, 3]
 
 // -----------------------------------
@@ -290,7 +306,7 @@ map.set({ foo: 2 }, 'b')
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #3: Ojoj
+// Example #3: Ehh...
 // ---------------------------------------------------------------------
 
 new Set(1, 2, 3, 4)
@@ -308,34 +324,34 @@ new Set(1, 2, 3, 4)
         <pre class="cover"><code class="language-javascript">
 // Example #4
 // ---------------------------------------------------------------------
-// Usuwanie z kontenera.
-// UWAGA: Usuwanie odbywa się poprzez wartość, a nie indeks.
+// Remove item from collection.
+// WARNING: Remove is done by value, not index.
 var set = new Set([1, 2, 3, 4])
 set.delete(3) // true
 
 console.log(set) // Set {1, 2, 4}
 
-// albo po prostu...
-set.clear() // ...i mamy pustego Set-a
+// or simply...
+set.clear() // ...and we have empty Set
         </code></pre>
     </section>
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #5: MAGIA
+// Example #5: MAGIC
 // ---------------------------------------------------------------------
-// Pobranie wartości z kontenera {SetIterator}
+// Get values from collection {SetIterator}
 set.entries() // instead of: Object.entries(object) - ES2017 (a'ka ES8)
 
-// Pobranie listy wartości z kontenera {SetIterator}
+// Get values from collection {SetIterator}
 set.keys() // instead of: Object.keys(object)
 
-// Pobranie listy wartości z kontenera {SetIterator}
+// Get values from collection {SetIterator}
 set.values() // instead of: Object.values(object) - ES2017 (a'ka ES8)
 
 // hmmm...
-// set.values() oraz set.keys() zwracają Iterator,
-// który będzie pracować na tych samych danych, jednak
+// set.values() and set.keys() returns Iterator,
+// which will be working on the same data, but
 
 set.values() === set.keys() // false
 
@@ -346,15 +362,15 @@ set.values() === set.keys() // false
         <pre class="cover"><code class="language-javascript">
 // Example #6
 // ---------------------------------------------------------------------
-// Pobranie... a czego właściwie?
+// Get... but what exactly?
 set.get(key) // TypeError: set.get is not a function
 
-// Sprawdzenie, czy dana wartość znajduje się w kontenerze
+// Check, if value is in collection
 set.has(value)
 
 // instead of:
-array.indexOf(value) !== -1
 array.includes(value)
+array.indexOf(value) !== -1
         </code></pre>
     </section>
 
@@ -362,13 +378,13 @@ array.includes(value)
         <pre class="cover"><code class="language-javascript">
 // Example #7
 // ---------------------------------------------------------------------
-// Dodanie do kontenera
+// Add to collection
 set.add() // instead of: array.push(value)
 
-// UWAGA: Niestety nie można w następujący sposób:
+// WARNING: Unfortunately that approach is not valid:
 set.add(val1, val2, val3...)
 
-// podobnie jak tutaj:
+// similar like this:
 array.push(val1, val2, val3...)
 
         </code></pre>
@@ -376,7 +392,7 @@ array.push(val1, val2, val3...)
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #8: Prosta iteracja
+// Example #8: Simple iteration
 // ---------------------------------------------------------------------
 var set = new Set([1, 1, 2])
 
@@ -395,7 +411,7 @@ set.forEach((i) => {
 // Example #10: Casting
 // ---------------------------------------------------------------------
 
-// Rzutowanie na "string"
+// Cast to "string"
 String(new Set) === "[object Set]"
 
 
@@ -421,7 +437,7 @@ String(new Set) === "[object Set]"
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #1: Ubogość
+// Example #1: Poverty
 // ---------------------------------------------------------------------
 var weakMap = new WeakMap()
 var key = { foo: 1 }
@@ -439,7 +455,7 @@ weakMap.has(key) // true
 weakMap.delete([1]) // false
 weakMap.delete(key) // true
 
-// nie ma więcej metod...
+// no further methods...
         </code></pre>
     </section>
 
@@ -448,7 +464,7 @@ weakMap.delete(key) // true
 // Example #2: Casting
 // ---------------------------------------------------------------------
 
-// Rzutowanie na "string"
+// Cast to "string"
 String(new WeakMap) === "[object WeakMap]"
 
 
@@ -477,13 +493,13 @@ new WeakMap(new Set([1]).entries())
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #4: "Holy" couple = { key, value }
+// Example #4: "Holy" couple key/value
 // ---------------------------------------------------------------------
 var weakMap = new WeakMap()
 
 weakMap.set([1, 2, 3], Math.random())
-weakMap.set([1, 2, 3], Math.random()) // ojoj...
-weakMap.set([1, 2, 3], Math.random()) // ojoj...
+weakMap.set([1, 2, 3], Math.random()) // ehh...
+weakMap.set([1, 2, 3], Math.random()) // ehh...
 
 
 
@@ -505,7 +521,7 @@ weakMap.set([1, 2, 3], Math.random()) // ojoj...
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #1: Problem z konstruktorem
+// Example #1: Problem with constructor
 // ---------------------------------------------------------------------
 
 new WeakSet([1, 2, 3]);
@@ -522,16 +538,16 @@ new WeakSet(1, 2, 3);
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #2: Proste API
+// Example #2: Simple API
 // ---------------------------------------------------------------------
-// Dodajemy tylko obiekty (Array, Function, RegExp, Object)
+// Adding only objects (Array, Function, RegExp, Object)
 weakSet.add(1) // TypeError: Invalid value used in weak set
 weakSet.add([1]) // WeakSet {[1]}
 
-// Sprawdzanie przez referencję.
+// Checking by reference (not value)
 weakSet.has([1]) // false
 
-// Usuwanie również przez referencję.
+// Remove by reference too.
 weakSet.delete([1]) // false
 console.log(weakSet) // WeakSet {[1]}
         </code></pre>
@@ -539,10 +555,10 @@ console.log(weakSet) // WeakSet {[1]}
 
     <section class="slide">
         <pre class="cover"><code class="language-javascript">
-// Example #3: Rzutowanie
+// Example #3: Cast
 // ---------------------------------------------------------------------
 
-// Rzutowanie na "string"
+// Cast to "string"
 String(new WeakSet) === '[object WeakSet]'
 
 
@@ -568,7 +584,7 @@ var advanced = [ o, { foo: 2 }, { foo: 3 }, o ];
 var weakSet = new WeakSet();
 advanced.forEach(weakSet.add.bind(weakSet))
 // WeakSet {Object {foo: 1}, Object {foo: 2}, Object {foo: 3}}
-// ...ale to już Set zapewnia
+// ...but Set is ensure that
         </code></pre>
     </section>
 
@@ -579,10 +595,12 @@ advanced.forEach(weakSet.add.bind(weakSet))
     <section class="slide">
         <h2>TODO</h2>
         <ul>
-            <li>weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kontenerach</li>
-            <li>przebadać WeakMap oraz WeakSet pod kątem Memory Leak (prawdopodobnie klucze są usuwane przez GC)</li>
-            <li>dodać przykłady wykorzystania WeakSet i WeakMap (korzystając z przykładów podczas tworzenie definicji dla specyfikacji)</li>
+            <li>weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych collectionch</li>
+            <li>przebadać WeakMap oraz WeakSet pod kątem Memory Leak (prawdopodobnie keye są usuwane przez GC)</li>
+            <li>dodać przykłady wykorzystania WeakSet i WeakMap (korzystając from przykładów podczas tworzenie definicji dla specyfikacji)</li>
             <li>dodać interesujące tła</li>
+            <li>przerobić tak, aby nie skrolować slajdów do dołu</li>
+            <li>zrobić jakąś historię</li>
         </ul>
 
         <p class="note">This is last slide. Thanks!</p>
