@@ -1,8 +1,8 @@
 # slides-map-set-weakmap-weakset
 
-> :clipboard: Slides for presentation about JavaScript (ES2016) data holders: Map, Set, WeakMap i WeakSet. 
+> :clipboard: Slides about new collections in JS (from ECMAScript 2015): Map, Set, WeakMap i WeakSet. 
 
-## What am I used?
+## Sources
 
 ### Language specification
 
