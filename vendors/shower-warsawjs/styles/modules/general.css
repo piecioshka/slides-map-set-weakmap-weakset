@@ -1,5 +1,3 @@
-/* Custom style for shower-ribbon.css */
-
 /* Hide top badge on each slide */
 .slide:after {
     display: none;

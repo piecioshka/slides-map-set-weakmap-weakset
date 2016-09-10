@@ -4,7 +4,14 @@
 
 ## Sources
 
-### Language specification
+### ECMAScript Language specification
+
+* Map: http://www.ecma-international.org/ecma-262/6.0/#sec-map-objects
+* Set: http://www.ecma-international.org/ecma-262/6.0/#sec-set-objects
+* WeakMap: http://www.ecma-international.org/ecma-262/6.0/#sec-weakmap-objects
+* WeakSet: http://www.ecma-international.org/ecma-262/6.0/#sec-weakset-objects
+
+### Mozilla Developer Network
 
 * Map: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
 * Set: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
