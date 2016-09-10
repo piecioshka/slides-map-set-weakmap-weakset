@@ -119,6 +119,55 @@
     </section>
 
     <section class="slide">
+        <h2>Support</h2>
+
+        <table class="striped">
+            <tr>
+                <th scope="col">...</th>
+                <th>Map</th>
+                <th>Set</th>
+                <th>WeakMap</th>
+                <th>WeakSet</th>
+            </tr>
+            <tr>
+                <th scope="row">Chrome</th>
+                <td>38</td>
+                <td>38</td>
+                <td>36</td>
+                <td>36</td>
+            </tr>
+            <tr>
+                <th scope="row">Firefox</th>
+                <td>13</td>
+                <td>13</td>
+                <td>6</td>
+                <td>34</td>
+            </tr>
+            <tr>
+                <th scope="row">IE</th>
+                <td>11</td>
+                <td>11</td>
+                <td>11</td>
+                <td>not supported</td>
+            </tr>
+            <tr>
+                <th scope="row">Opera</th>
+                <td>25</td>
+                <td>25</td>
+                <td>23</td>
+                <td>23</td>
+            </tr>
+            <tr>
+                <th scope="row">Safari</th>
+                <td>7.1</td>
+                <td>7.1</td>
+                <td>7.1</td>
+                <td>9</td>
+            </tr>
+        </table>
+    </section>
+
+    <section class="slide">
         <h2 class="shout">Which collection is the best?</h2>
     </section>
 
@@ -380,6 +429,63 @@
             The Set object lets you store unique values of any type, whether primitive values or object references.
             <strong>MDN @ 2016</strong>
         </p>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px; line-height: 30px" class="language-javascript line-numbers">
+            <code>
+            // #1: Example: AssetsLoader
+            // ---------------------------------------------------------------------
+            class AssetsLoader {
+                constructor() {
+                    this._images = new Set();
+                }
+                addImage(path /* string */) {
+                    return this._images.add(loadImage(path));
+                }
+                loadImages() {
+                    return Promise.all(this._images);
+                }
+            }
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px; line-height: 30px" class="language-javascript line-numbers">
+            <code>
+            // #2: Example: AssetsLoader v2: Subclassing Set
+            // ---------------------------------------------------------------------
+            class AssetsLoader {
+                constructor() {
+                    this._images = new Images();
+                }
+                addImage(path /* string */) {
+                    return this._images.add(path);
+                }
+                loadImages() {
+                    return this._images.load();
+                }
+            }
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px; line-height: 30px" class="language-javascript line-numbers">
+            <code>
+            // #2: Example: AssetsLoader v2: Subclassing Set
+            // ---------------------------------------------------------------------
+            class Images extends Set {
+                add(path) {
+                    super.add.call(this, loadImage(path));
+                }
+                load() {
+                    return Promise.all(this.keys());
+                }
+            }
+            </code>
+        </pre>
     </section>
 
     <section class="slide prism">
@@ -810,6 +916,7 @@
         <h2>Sources</h2>
 
         <ul>
+            <li><a href="https://github.com/piecioshka/concept-assets-loader">https://github.com/piecioshka/concept-assets-loader</a></li>
             <li><a href="https://github.com/piecioshka/test-es2015-proxy">https://github.com/piecioshka/test-es2015-proxy</a></li>
             <li><a href="https://gist.github.com/ebidel/1b553d571f924da2da06">https://gist.github.com/ebidel/1b553d571f924da2da06</a></li>
             <li><a href="https://www.nczonline.net/newsletter/archive/4078df5df5/">https://www.nczonline.net/newsletter/archive/4078df5df5/</a></li>
@@ -828,8 +935,7 @@
             // - dodać przykłady wykorzystania WeakSet i WeakMap (korzystając from przykładów podczas tworzenie definicji dla specyfikacji)
             // - subclassing of Map, Set
             // - przerobić tak, aby nie skrolować slajdów do dołu
-            // - dodać info o wsparciu w przeglądarkach
-            // - dodać przykład obrazków w landing page-u (poco tablica do tworzenia Seta?)
+            // - przetestować wsparcie w przeglądarkach
             // - zgrupować podobne cechy i podstawowe różnice
             // WeakSet: cache, observer pattern (WeakReferences)
             // Zwroty:
