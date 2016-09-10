@@ -171,6 +171,10 @@
         <h2 class="shout">Which collection is the best&#x2049;&#xFE0F;</h2>
     </section>
 
+    <section class="slide">
+        <h2 class="shout">No one.</h2>
+    </section>
+
     <section class="slide photo photo-12">
         <h2 class="shout"><code>Map</code></h2>
         <p class="note">
@@ -185,14 +189,15 @@
                 // #1: Example: Array as key
                 // ---------------------------------------------------------------------
                 var map = new Map()
-                map.set(['ie', 'moz'], 'a')
-                map.set(['ie', 'moz', 'firefox'], 'b')
+                map.set(['win8', 'moz'], 'a')
+                map.set(['xp', 'firefox'], 'b')
 
                 function check(list, ...browsers) {
                     for (let [key, value] of list)
-                        if (String(browsers) === String(key)) return value
+                        if (String(browsers) === String(key))
+                            return value
                 }
-                check(map, 'ie', 'moz', 'firefox') // ???
+                check(map, 'xp', 'firefox') // ???
             </code>
         </pre>
     </section>
