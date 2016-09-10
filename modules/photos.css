@@ -32,23 +32,6 @@
     background-repeat: no-repeat;
 }
 
-/*bridge.jpg*/
-/*fire.jpg*/
-/*fishing-rod.jpg*/
-/*flower.jpg*/
-/*grain.jpg*/
-/*hand.jpg*/
-/*hay.jpg*/
-/*pebbles.jpg*/
-/*plants.jpg*/
-/*sky.jpg*/
-/*still-life.jpg*/
-/*sunset-2.jpg*/
-/*sunset.jpg*/
-/*tree.jpg*/
-/*trees.jpg*/
-/*view.jpg*/
-
 .photo-1::before { background-image: url("../photos/bridge.jpg"); }
 .photo-2::before { background-image: url("../photos/fire.jpg"); }
 .photo-3::before { background-image: url("../photos/fishing-rod.jpg"); }
@@ -57,3 +40,11 @@
 .photo-6::before { background-image: url("../photos/hand.jpg"); }
 .photo-7::before { background-image: url("../photos/hay.jpg"); }
 .photo-8::before { background-image: url("../photos/pebbles.jpg"); }
+.photo-9::before { background-image: url("../photos/plants.jpg"); }
+.photo-10::before { background-image: url("../photos/sky.jpg"); }
+.photo-11::before { background-image: url("../photos/still-life.jpg"); }
+.photo-12::before { background-image: url("../photos/sunset.jpg"); }
+.photo-13::before { background-image: url("../photos/sunset-2.jpg"); }
+.photo-14::before { background-image: url("../photos/tree.jpg"); }
+.photo-15::before { background-image: url("../photos/trees.jpg"); }
+.photo-16::before { background-image: url("../photos/view.jpg"); }

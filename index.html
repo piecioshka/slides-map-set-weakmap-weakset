@@ -18,6 +18,8 @@
 
     <!-- My own beautiful photos as backgrounds -->
     <link rel="stylesheet" href="modules/photos.css">
+    <link rel="stylesheet" href="modules/overlay-bars.css">
+    <link rel="stylesheet" href="modules/birthday.css">
 </head>
 <body class="shower list">
     <header class="caption">
@@ -30,6 +32,7 @@
             <!-- Logo WarsawJS -->
             <img src="pictures/logo/warsawjs-logo-light.png">
         </div>
+
         <div class="details">
             <!-- 1. Avatar -->
             <img src="pictures/me.jpg" alt="Speaker"/>
@@ -48,18 +51,75 @@
             <!-- 5. Contact the speaker -->
             <h2><a href="http://twitter.com/piecioshka">@piecioshka</a></h2>
         </div>
+
+        <div class="next slides-short-url as-overlay">
+            <a href="http://bit.ly/2crnPjJ">bit.ly/2crnPjJ</a>
+        </div>
+    </section>
+
+    <section class="slide" itemscope itemtype="http://schema.org/Person">
+        <div class="who-am-i">
+            <h2>Who am I?</h2>
+
+            <h3 itemprop="jobTitle">Kierownik Działu Aplikacji Webowych</h3>
+
+            <p itemscope itemtype="https://schema.org/Organization">
+                <span itemprop="name">Cyfrowy Polsat</span>,
+                <span itemprop="location">Warsaw</span>
+            </p>
+
+            <p>
+                <span><a href="http://www.refsnesdata.no/certification/w3certified.asp?id=4931932">JavaScript Ninja</a>. Mac lover. Open source fan.</span>
+                <span><a href="https://piecioshka.pl/blog/">Blogger</a>.</span><br/>
+                <span>Organizer <a href="http://warsawjs.com/" itemprop="memberOf">WarsawJS</a>.</span>
+                <span>Author of several libs in <a href="https://www.npmjs.com/~piecioshka">@npm</a></span>
+            </p>
+
+            <p class="note">"Kto chce szuka sposobu, kto nie chce szuka powodu."</p>
+        </div>
+
+        <div class="next twitter-username as-overlay">
+            <a href="http://twitter.com/piecioshka">@piecioshka</a>
+        </div>
+    </section>
+
+    <section class="slide birthday">
+        <h2 class="shout grow">
+            <span class="years">2</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;birthday&#x1F382;</span>
+        </h2>
     </section>
 
     <section class="slide">
-        <h2>Collections in JavaScript</h2>
-        <ol>
-            <li class="next"><code>Array</code> (well known)</li>
-            <li class="next"><code>Object</code> (well known)</li>
-            <li class="next"><code>Map</code> &#x2728;</li>
-            <li class="next"><code>Set</code> &#x2728;</li>
-            <li class="next"><code>WeakMap</code> &#x2728;</li>
-            <li class="next"><code>WeakSet</code> &#x2728;</li>
-        </ol>
+        <h2 class="shout">What collections<br/>we have?</h2>
+    </section>
+
+    <section class="slide photo photo-7">
+        <h2 class="shout"><code>Object</code><br/>(well known)</h2>
+    </section>
+
+    <section class="slide photo photo-5">
+        <h2 class="shout"><code>Array</code><br/>(well known)</h2>
+    </section>
+
+    <section class="slide photo photo-14">
+        <h2 class="shout">&#x2728; <code>Map</code> &#x2728;</h2>
+    </section>
+
+    <section class="slide photo photo-11">
+        <h2 class="shout">&#x2728; <code>Set</code> &#x2728;</h2>
+    </section>
+
+    <section class="slide photo photo-10">
+        <h2 class="shout"><code>WeakMap</code> &#x2728;</h2>
+    </section>
+
+    <section class="slide photo photo-15">
+        <h2 class="shout"><code>WeakSet</code> &#x2728;</h2>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout">Which collection is the best?</h2>
     </section>
 
     <section class="slide photo photo-1">
@@ -145,7 +205,7 @@
     <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-            // Example #5: MAGIC
+            // Example #5: Magic
             // ---------------------------------------------------------------------
             // Get pair key/value form collection {MapIterator}
             map.entries() // instead of: Object.entries(object) - ES2017 (a'ka ES8)
@@ -401,7 +461,7 @@
     <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-            // Example #5: MAGIC
+            // Example #5: Magic
             // ---------------------------------------------------------------------
             // Get values from collection {SetIterator}
             set.entries() // instead of: Object.entries(object) - ES2017 (a'ka ES8)
@@ -678,36 +738,106 @@
     </section>
 
     <section class="slide prism">
+        <h2>Hints</h2>
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                window.name = { foo: 1 }
+                console.log(window.name) // => [object Object]
+                // what happen here?
+                // [immutable type]
+
+                const object = {};
+                object.a = 1;
+                console.log(object.a) // => 1
+                // why we can do that?
+                // [immutable reference]
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                typeof null === 'object' // => true
+                // why?
+                // [empty reference to object]
+
+                Number.isFinite('1.2') // => false
+                isFinite('1.2') // => true
+                // OMG
+                // [more robust]
+
+                typeof class {} === "function" // true
+                // why?
+                // [syntactic sugar]
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <h2>Angular2 fans?</h2>
+
+        <pre style="font-size: 45px;" class="language-javascript line-numbers">
+            <code>
+            Object.observe // => undefined
+            // but Proxy helps
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                let object = {};
+                object = new Proxy(object, {
+                    set: (o, prop, value) => {
+                        console.warn(`${prop} is set to ${value}`);
+                        o[prop] = value;
+                    },
+                    get: (o, prop) => {
+                        console.warn(`${prop} is read`);
+                        return o[prop];
+                    }
+                })
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Sources</h2>
+
+        <ul>
+            <li><a href="https://github.com/piecioshka/test-es2015-proxy">https://github.com/piecioshka/test-es2015-proxy</a></li>
+            <li><a href="https://gist.github.com/ebidel/1b553d571f924da2da06">https://gist.github.com/ebidel/1b553d571f924da2da06</a></li>
+            <li><a href="https://www.nczonline.net/newsletter/archive/4078df5df5/">https://www.nczonline.net/newsletter/archive/4078df5df5/</a></li>
+            <li><a href="http://stackoverflow.com/questions/18808226/why-is-typeof-null-object">http://stackoverflow.com/questions/18808226/why-is-typeof-null-object</a></li>
+        </ul>
+    </section>
+
+    <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
             // TODO
             // - stworzyć historię
-            // - na pierwszym slajdzie link do wersji online oraz do Twittera
-            // - na każdym slajdzie w prawym dolnym rogu Twitter username
             // - weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kolekcjach
             // - przebadać WeakMap oraz WeakSet pod kątem Memory Leak (prawdopodobnie klucze są usuwane przez GC)
             // - benchmarking? https://github.com/bestiejs/benchmark.js
             // - dodać przykłady wykorzystania WeakSet i WeakMap (korzystając from przykładów podczas tworzenie definicji dla specyfikacji)
-            // - dodać interesujące tła
             // - subclassing of Map, Set
             // - przerobić tak, aby nie skrolować slajdów do dołu
             // - dodać info o wsparciu w przeglądarkach
-            // - dodać przykład obrazków w landing page-u (poco tablica do tworzenia Seta??
+            // - dodać przykład obrazków w landing page-u (poco tablica do tworzenia Seta?)
             // - zgrupować podobne cechy i podstawowe różnice
             // WeakSet: cache, observer pattern (WeakReferences)
-            // - dodać slajd z quirkami
-            //     - window.name // zawsze string
-            //     - typeof null === 'object'
-            //     - arguments[0], ale arguments.forEach => undefined
-            //     - const object = {}; object.a = 1; // działa!! :D
-            //     - Number.isFinite vs isFinite
-            //     - Object.observe z użyciem Proxy
-            //     - typeof class {} === "function";
             // Zwroty:
             //     - kto z was na co dzień używa Map albo Set? i dlaczego?
             //     - jesteście najlepszą publiczności przed jaką dzisiaj występowałem
             </code>
         </pre>
+    </section>
+
+    <section class="slide prism">
+        <h2 class="shout grow">Thanks!<br/>Next meetup:<br/><mark style="font-size: 110px">12-10-2016</mark></h2>
     </section>
 
     <div class="progress"></div>
