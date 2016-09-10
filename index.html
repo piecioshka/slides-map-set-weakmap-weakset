@@ -92,16 +92,36 @@
     </section>
 
     <section class="slide">
-        <h2 class="shout">What collections<br/>we have?</h2>
+        <h2 class="shout">What collections<br/>we have&#x2753;</h2>
     </section>
 
-    <section class="slide">
+    <section class="slide compact">
         <h2>Ignore list of collections</h2>
 
         <p>
-            SIMD (Float32Array, Float64Array, Int8Array, Int16Array, Int32Array, Uint8Array, Uint8ClampedArray, Uint16Array, Uint32Array),
-            ArrayBuffer
+            SIMD:
+            <code style="font-size: 15px;">
+                Float32Array,
+                Float64Array,
+                Int8Array,
+                Int16Array,
+                Int32Array,
+                Uint8Array,
+                Uint8ClampedArray,
+                Uint16Array,
+                Uint32Array
+            </code>
+        </p>
+
+        <p>
             DOM:
+            <code>
+
+            </code>
+        </p>
+
+        <p>
+            ArrayBuffer
             AudioTrackList,
             CSSRuleList,
             ClientRectList,
@@ -165,7 +185,7 @@
         <h2 class="shout"><code>WeakSet</code> &#x2728;</h2>
     </section>
 
-    <section class="slide">
+    <section class="slide compact">
         <h2>Desktop browsers support</h2>
 
         <table class="striped">
@@ -978,8 +998,14 @@
 
         <pre style="font-size: 45px;" class="language-javascript line-numbers">
             <code>
+            Object.observe(object, (changes) => {
+                console.log(changes);
+            })
+
+            // but today...
             Object.observe // => undefined
-            // but Proxy helps
+
+            // what can I do? use Proxy!
             </code>
         </pre>
     </section>
@@ -1002,7 +1028,7 @@
         </pre>
     </section>
 
-    <section class="slide">
+    <section class="slide compact">
         <h2>Sources</h2>
 
         <ul>
