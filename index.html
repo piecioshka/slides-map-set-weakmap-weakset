@@ -434,7 +434,47 @@
     <section class="slide prism">
         <pre style="font-size: 30px; line-height: 30px" class="language-javascript line-numbers">
             <code>
-            // #1: Example: AssetsLoader
+            // #1: Example: AssetsLoader: loadImage
+            // ---------------------------------------------------------------------
+            function loadImage(path /* string */) {
+                return new Promise((resolve, reject) => {
+                    let image = new Image();
+                    let on = image.addEventListener;
+
+                    on('load', () => resolve(image));
+                    on('error', () => reject(image));
+                    image.src = path;
+                })
+            }
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px; line-height: 30px" class="language-javascript line-numbers">
+            <code>
+            // #1: Example: AssetsLoader: test case
+            // ---------------------------------------------------------------------
+            var al = new AssetsLoader();
+
+            al.addImage('../assets/images/plants.jpg');
+            al.addImage('../assets/images/sky.jpg');
+
+            al.loadImages()
+                .catch((error) => {
+                    console.error(error);
+                })
+                .then((images) => {
+                    console.info('Loaded successful', images);
+                });
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px; line-height: 30px" class="language-javascript line-numbers">
+            <code>
+            // #1: Example: AssetsLoader v1
             // ---------------------------------------------------------------------
             class AssetsLoader {
                 constructor() {
@@ -918,6 +958,8 @@
         <ul>
             <li><a href="https://github.com/piecioshka/concept-assets-loader">https://github.com/piecioshka/concept-assets-loader</a></li>
             <li><a href="https://github.com/piecioshka/test-es2015-proxy">https://github.com/piecioshka/test-es2015-proxy</a></li>
+            <li><a href="https://github.com/piecioshka/test-es6-map">https://github.com/piecioshka/test-es6-map</a></li>
+            <li><a href="https://github.com/piecioshka/test-es6-map-foreach">https://github.com/piecioshka/test-es6-map-foreach</a></li>
             <li><a href="https://gist.github.com/ebidel/1b553d571f924da2da06">https://gist.github.com/ebidel/1b553d571f924da2da06</a></li>
             <li><a href="https://www.nczonline.net/newsletter/archive/4078df5df5/">https://www.nczonline.net/newsletter/archive/4078df5df5/</a></li>
             <li><a href="http://stackoverflow.com/questions/18808226/why-is-typeof-null-object">http://stackoverflow.com/questions/18808226/why-is-typeof-null-object</a></li>
