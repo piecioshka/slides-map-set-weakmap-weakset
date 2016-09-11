@@ -257,8 +257,225 @@
     <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
+                // #1: API
+                // --------------------------------------------------
+                // Check collection length.
+                // WARNING: Property `size` is a getter.
+                map.size // instead of: array.length
+
+                // Clear collection
+                map.clear() // instead of: array.length = 0
+
+                // Remove pair key/value
+                map.delete(key) // instead of: array.splice(0, 1)
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #2: API
+                // --------------------------------------------------
+                // Get value from key
+                map.get(key) // instead of: object[key]
+
+                // Check if key is used in collection
+                map.has(key)
+
+                // instead of:
+                object.hasOwnProperty(key) // or: key in object
+                array.indexOf(value) !== -1
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #3: API
+                // --------------------------------------------------
+                // Add to collection
+                map.set() // instead of: array.push(value)
+
+                // WARNING: this approach is not valid
+                map.set(key1, val1, key2, val2)
+
+                // similar like this:
+                array.push(val1, val2, val3...)
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #4: API: Hashmap
+                // --------------------------------------------------
+                var map = new Map();
+
+                map.set('foo', 'bar')
+
+                map.size // 1
+
+                map.get('foo') // 'bar'
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #5: API: Magic
+                // --------------------------------------------------
+                // Get pair key/value form collection {MapIterator}
+                map.entries() // similar to: Object.entries(object)
+
+                // Get keys from collection {MapIterator}
+                map.keys() // similar to: Object.keys(object)
+
+                // Get values from collection {MapIterator}
+                map.values() // similar to: Object.values(object)
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #6: API: Simple iteration
+                // --------------------------------------------------
+
+                // Iteration through collection
+                map.forEach((value, key) => /* ... */)
+                // the same in arrays
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #7: API: Casting
+                // --------------------------------------------------
+
+                // Cast to "string"
+                String(new Map) === "[object Map]"
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #8: API: CR.D?
+                // --------------------------------------------------
+                var map = new Map();
+                map.set({}, 1) // Block access to value "1"
+                map.size // 1
+                // But let's try to get...
+                map.get({}) // undefined
+                // ...or maybe we can remove it?
+                map.delete({}) // false
+                map.size // 1
+                // So, how you can remove this key/value?
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #9: API: Remove value from collection
+                // --------------------------------------------------
+
+                // Clear whole collection helps...
+                map.clear()
+
+                // ...or remove in loop.
+                for (var [key, value] of map.entries()) {
+                    map.delete(key) // true
+                }
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #10: API
+                // --------------------------------------------------
+                var map = new Map()
+                map.set({ a: 1 }, 'a')
+
+                var map2 = new Map(map.entries())
+
+                // Comparison of 2 maps will fail, just as arrays.
+                (map === map2) // false
+
+                // But I have hope :)
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #11: API: WTF?
+                // --------------------------------------------------
+                var map = new Map()
+                map.set() // Map { undefined => undefined }
+                map.size // 1
+
+                // In arrays
+                var array = []
+                array.push()
+                array.length // 0
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #12: API: "Holy" couple key/value
+                // --------------------------------------------------
+                var map = new Map();
+                var rand = Math.random();
+
+                map.set([1, 2, 3], Math.random())
+                map.set([1, 2, 3], Math.random())
+                map.set([1, 2, 3], rand)
+                map.set([1, 2, 3], rand)
+
+                map.size // 4
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #13: API: .. but unique key!
+                // --------------------------------------------------
+                var map = new Map();
+                var rand = Math.random();
+
+                map.set('item', Math.random())
+                map.set('item', Math.random())
+                map.set('item', rand)
+                map.set('item', rand)
+
+                map.size // 1
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
                 // #1: Example: Array as key
-                // ---------------------------------------------------------------------
+                // --------------------------------------------------
                 var map = new Map()
                 map.set(['win8', 'moz'], 'a')
                 map.set(['xp', 'firefox'], 'b')
@@ -268,229 +485,26 @@
                         if (String(browsers) === String(key))
                             return value
                 }
-                check(map, 'xp', 'firefox') // ???
+                check(map, 'xp', 'firefox') // 'b'
             </code>
         </pre>
     </section>
 
     <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+        <pre style="font-size: 25px;" class="language-javascript line-numbers">
             <code>
-            // #2: API
-            // ---------------------------------------------------------------------
-            // Check collection length.
-            // WARNING: Property `size` is a getter.
-            map.size // instead of: array.length
-
-            // Clear collection
-            map.clear() // instead of: array.length = 0
-
-            // Remove pair key/value
-            map.delete(key) // instead of: array.splice(0, 1)
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #3: API
-            // ---------------------------------------------------------------------
-            // Get value from key
-            map.get(key) // instead of: object[key]
-
-            // Check, if key is used in collection
-            map.has(key)
-
-            // instead of:
-            key in object
-            array.indexOf(value) !== -1
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-                // #4: API
-                // ---------------------------------------------------------------------
-                // Add to collection
-                map.set() // instead of: array.push(value)
-
-                // WARNING: Unfortunately, that approach is not valid
-                map.set(key1, val1, key2, val2) // similar like this: array.push(val1, val2, val3...)
-
-
-
-
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #5: API: Magic
-            // ---------------------------------------------------------------------
-            // Get pair key/value form collection {MapIterator}
-            map.entries() // instead of: Object.entries(object) - ES2017 (a'ka ES8)
-
-            // Get keys from collection {MapIterator}
-            map.keys() // instead of: Object.keys(object)
-
-            // Get values from collection {MapIterator}
-            map.values() // instead of: Object.values(object) - ES2017 (a'ka ES8)
-
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #6: API: Simple iteration
-            // ---------------------------------------------------------------------
-
-            // Iteration through collection
-            map.forEach((value, key) => /* ... */) // the same with arrays
-
-
-
-
-
-
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #7: API: Casting
-            // ---------------------------------------------------------------------
-            // Cast to "string"
-            String(new Map) === "[object Map]"
-
-
-
-
-
-
-
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #8: API: CR.D?
-            // ---------------------------------------------------------------------
-            var map = new Map();
-            map.set({}, 1) // Block access to value "1"
-            map.size // 1
-
-            // But let's try to get...
-            map.get({}) // undefined
-
-            // ...or maybe we can remove it?
-            map.delete({}) // false
-            map.size // 1
-
-            // So, how can you remove that's key/value?
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #9: API: Remove value from collection
-            // ---------------------------------------------------------------------
-
-            // Clear whole collection helps...
-            map.clear()
-
-            // ...or remove in loop.
-            for (var [key, value] of map.entries()) {
-                map.delete(key) // true
-            }
-
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #10: Example: Async iteration
-            // ---------------------------------------------------------------------
-            map.set({ foo: 1 }, 'a')
-            map.set({ foo: 2 }, 'b')
-
-            var iterator = map.values() // {MapIterator}
-            var interval = setInterval(() => {
-                let item = iterator.next()
-                if (item.done) {
-                    clearInterval(interval)
-                    return
-                }
-                console.log(item.value) // 'a' => [ONE SECOND] => 'b'
-            }, 1000)
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #11: API
-            // ---------------------------------------------------------------------
-            var map = new Map()
-            map.set({ a: 1 }, 'a')
-
-            var mo = new Map(map.entries())
-
-            // Comparison of 2 maps will fail, just as arrays.
-            (map === mo) // false
-
-            // But I had hope :)
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #12: API: WTF?
-            // ---------------------------------------------------------------------
-            var map = new Map()
-            map.set() // Map { undefined => undefined }
-            map.size // 1
-
-            // In arrays
-            var array = []
-            array.push()
-            array.length // 0
-
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #13: API: "Holy" couple key/value
-            // ---------------------------------------------------------------------
-            var map = new Map()
-
-            map.set([1, 2, 3], Math.random())
-            map.set([1, 2, 3], Math.random())
-            map.set([1, 2, 3], Math.random())
-            map.set([1, 2, 3], Math.random())
-
-            map.size // 4
-
+                // #2: Example: Async iteration
+                // --------------------------------------------------
+                map.set({ foo: 1 }, 'a').set({ foo: 2 }, 'b')
+                var iterator = map.values() // {MapIterator}
+                var interval = setInterval(() => {
+                    let item = iterator.next()
+                    if (item.done) {
+                        clearInterval(interval)
+                        return
+                    }
+                    console.log(item.value) // 'a' => [ONE SECOND] => 'b'
+                }, 1000)
             </code>
         </pre>
     </section>
@@ -508,20 +522,111 @@
     </section>
 
     <section class="slide prism">
-        <pre style="font-size: 30px; line-height: 30px" class="language-javascript line-numbers">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-            // #1: Example: AssetsLoader: loadImage helper
-            // ---------------------------------------------------------------------
-            function loadImage(path /* string */) {
-                return new Promise((resolve, reject) => {
-                    let image = new Image();
-                    let on = image.addEventListener;
+                // #1: API: Ehh...
+                // --------------------------------------------------
 
-                    on('load', () => resolve(image));
-                    on('error', () => reject(image));
-                    image.src = path;
+                new Set(1, 2, 3, 4)
+                // TypeError: (var)[Symbol.iterator] is not a function
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #2: API
+                // --------------------------------------------------
+                // Remove item from collection.
+                // WARNING: Removing is by value, not index.
+                var set = new Set([1, 2, 3, 4])
+                set.delete(3) // true
+
+                console.log(set) // Set {1, 2, 4}
+
+                // or simply...
+                set.clear() // ...and we have empty Set
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #3: API: Magic
+                // --------------------------------------------------
+                // Get values from collection {SetIterator}
+                set.entries()
+                set.keys()
+                set.values()
+
+                // hmmm...
+                // set.values() and set.keys() returns Iterator,
+                // which will be working on the same data, but
+                set.values() === set.keys() // false
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #4: API
+                // --------------------------------------------------
+                // Get... but what exactly?
+                set.get(key) // TypeError: set.get is not a function
+
+                // Check if value is in collection
+                set.has(value)
+
+                // instead of:
+                array.indexOf(value) !== -1
+                array.includes(value) // ES2016 (a.ka. ES7) way
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #5: API: Append
+                // --------------------------------------------------
+                // Add to collection
+                set.set() // ??? undefined
+                set.add() // instead of: array.push(value)
+
+                // WARNING: this approach is not valid:
+                set.add(val1, val2, val3...)
+
+                // similar like this:
+                array.push(val1, val2, val3...)
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #6: API: Simple iteration
+                // --------------------------------------------------
+                var set = new Set([1, 1, 2])
+
+                set.forEach((item) => {
+                    console.log(item) // 1, 2
                 })
-            }
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #7: API: Casting
+                // --------------------------------------------------
+
+                // Cast to "string"
+                String(new Set) === "[object Set]"
             </code>
         </pre>
     </section>
@@ -529,18 +634,18 @@
     <section class="slide prism">
         <pre style="font-size: 30px; line-height: 30px" class="language-javascript line-numbers">
             <code>
-            // #1: Example: AssetsLoader: test case
-            // ---------------------------------------------------------------------
-            var al = new AssetsLoader();
-            al.addImage('../assets/images/plants.jpg');
-            al.addImage('../assets/images/sky.jpg');
-            al.loadImages()
-                .catch((error) => {
-                    console.error(error);
-                })
-                .then((images) => {
-                    console.info('Loaded successful', images);
-                });
+                // #1: Example: AssetsLoader: loadImage helper
+                // --------------------------------------------------
+                function loadImage(path /* string */) {
+                    return new Promise((resolve, reject) => {
+                        let image = new Image();
+                        let on = image.addEventListener;
+
+                        on('load', () => resolve(image));
+                        on('error', () => reject(image));
+                        image.src = path;
+                    })
+                }
             </code>
         </pre>
     </section>
@@ -548,19 +653,18 @@
     <section class="slide prism">
         <pre style="font-size: 30px; line-height: 30px" class="language-javascript line-numbers">
             <code>
-            // #1: Example: AssetsLoader v1
-            // ---------------------------------------------------------------------
-            class AssetsLoader {
-                constructor() {
-                    this._images = new Set();
-                }
-                addImage(path /* string */) {
-                    return this._images.add(loadImage(path));
-                }
-                loadImages() {
-                    return Promise.all(this._images);
-                }
-            }
+                // #1: Example: AssetsLoader: test case
+                // --------------------------------------------------
+                var al = new AssetsLoader();
+                al.addImage('../assets/images/plants.jpg');
+                al.addImage('../assets/images/sky.jpg');
+                al.loadImages()
+                    .catch((error) => {
+                        console.error(error);
+                    })
+                    .then((images) => {
+                        console.info('Loaded successful', images);
+                    });
             </code>
         </pre>
     </section>
@@ -568,19 +672,19 @@
     <section class="slide prism">
         <pre style="font-size: 30px; line-height: 30px" class="language-javascript line-numbers">
             <code>
-            // #2: Example: AssetsLoader v2: Subclassing Set
-            // ---------------------------------------------------------------------
-            class AssetsLoader {
-                constructor() {
-                    this._images = new Images();
+                // #1: Example: AssetsLoader v1
+                // --------------------------------------------------
+                class AssetsLoader {
+                    constructor() {
+                        this._images = new Set();
+                    }
+                    addImage(path /* string */) {
+                        return this._images.add(loadImage(path));
+                    }
+                    loadImages() {
+                        return Promise.all(this._images);
+                    }
                 }
-                addImage(path /* string */) {
-                    return this._images.add(path);
-                }
-                loadImages() {
-                    return this._images.load();
-                }
-            }
             </code>
         </pre>
     </section>
@@ -588,16 +692,36 @@
     <section class="slide prism">
         <pre style="font-size: 30px; line-height: 30px" class="language-javascript line-numbers">
             <code>
-            // #2: Example: AssetsLoader v2: Subclassing Set
-            // ---------------------------------------------------------------------
-            class Images extends Set {
-                add(path) {
-                    super.add(loadImage(path));
+                // #2: Example: AssetsLoader v2: Subclassing Set
+                // --------------------------------------------------
+                class AssetsLoader {
+                    constructor() {
+                        this._images = new Images();
+                    }
+                    addImage(path /* string */) {
+                        return this._images.add(path);
+                    }
+                    loadImages() {
+                        return this._images.load();
+                    }
                 }
-                load() {
-                    return Promise.all(this.keys());
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px; line-height: 30px" class="language-javascript line-numbers">
+            <code>
+                // #2: Example: AssetsLoader v2: Subclassing Set
+                // --------------------------------------------------
+                class Images extends Set {
+                    add(path) {
+                        return super.add(loadImage(path));
+                    }
+                    load() {
+                        return Promise.all(this.keys());
+                    }
                 }
-            }
             </code>
         </pre>
     </section>
@@ -605,17 +729,17 @@
     <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-            // #1: Example: Mass addition
-            // ---------------------------------------------------------------------
-            var set = new Set()
-            var array = [1, 2, 3, 1, 3, 4, 5, 6, 6, 6, 6]
+                // #3: Example: Mass addition
+                // --------------------------------------------------
+                var set = new Set()
+                var array = [1, 2, 3, 1, 3, 4, 5, 6, 6, 6, 6]
 
-            array.forEach(set.add.bind(set))
-            console.log(set) // [1, 2, 3, 4, 5, 6]
+                array.forEach(set.add.bind(set))
+                console.log(set) // [1, 2, 3, 4, 5, 6]
 
-            // Without `bind` some error occur:
-            //   TypeError: Method Set.prototype.add called
-            //   on incompatible receiver undefined
+                // Without `bind` some error occur:
+                //   TypeError: Method Set.prototype.add called
+                //   on incompatible receiver undefined
             </code>
         </pre>
     </section>
@@ -623,21 +747,12 @@
     <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-            // #2: Example: Remove duplicated primitives (or objects)
-            // ---------------------------------------------------------------------
-            var array = [1, 2, 3, 1, 3]
+                // #4: Example: Remove duplicated primitives (Array)
+                // --------------------------------------------------
+                var array = [1, 2, 3, 1, 3]
 
-            // Constructor expect another collection
-            [...new Set(array)] // [1, 2, 3]
-
-            // -----------------------------------
-
-            var map = new Map()
-            map.set({ foo: 1 }, 'a')
-            map.set({ foo: 2 }, 'b')
-
-            [...new Set(map.keys())] // [{ foo: 1 }, { foo: 2 }]
-            [...new Set(map.values())] // ['a', 'b']
+                // Constructor expect another collection
+                [...new Set(array)] // [1, 2, 3]
             </code>
         </pre>
     </section>
@@ -645,130 +760,14 @@
     <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-            // #3: API: Ehh...
-            // ---------------------------------------------------------------------
+                // #4: Example: Remove duplicated primitives (Map)
+                // --------------------------------------------------
+                var map = new Map()
+                map.set({ foo: 1 }, 'a')
+                map.set({ foo: 2 }, 'b')
 
-            new Set(1, 2, 3, 4)
-            // TypeError: (var)[Symbol.iterator] is not a function
-
-
-
-
-
-
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #4: API
-            // ---------------------------------------------------------------------
-            // Remove item from collection.
-            // WARNING: Remove is done by value, not index.
-            var set = new Set([1, 2, 3, 4])
-            set.delete(3) // true
-
-            console.log(set) // Set {1, 2, 4}
-
-            // or simply...
-            set.clear() // ...and we have empty Set
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #5: API: Magic
-            // ---------------------------------------------------------------------
-            // Get values from collection {SetIterator}
-            set.entries() // instead of: Object.entries(object) - ES2017 (a'ka ES8)
-
-            // Get values from collection {SetIterator}
-            set.keys() // instead of: Object.keys(object)
-
-            // Get values from collection {SetIterator}
-            set.values() // instead of: Object.values(object) - ES2017 (a'ka ES8)
-
-            // hmmm...
-            // set.values() and set.keys() returns Iterator,
-            // which will be working on the same data, but
-
-            set.values() === set.keys() // false
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #6: API
-            // ---------------------------------------------------------------------
-            // Get... but what exactly?
-            set.get(key) // TypeError: set.get is not a function
-
-            // Check, if value is in collection
-            set.has(value)
-
-            // instead of:
-            array.includes(value)
-            array.indexOf(value) !== -1
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #7: API
-            // ---------------------------------------------------------------------
-            // Add to collection
-            set.add() // instead of: array.push(value)
-
-            // WARNING: Unfortunately that approach is not valid:
-            set.add(val1, val2, val3...)
-
-            // similar like this:
-            array.push(val1, val2, val3...)
-
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #8: API: Simple iteration
-            // ---------------------------------------------------------------------
-            var set = new Set([1, 1, 2])
-
-            set.forEach((i) => {
-                console.log(i) // 1, 2
-            })
-
-
-
-
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #10: API: Casting
-            // ---------------------------------------------------------------------
-
-            // Cast to "string"
-            String(new Set) === "[object Set]"
-
-
-
-
-
-
+                [...new Set(map.keys())] // [{ foo: 1 }, { foo: 2 }]
+                [...new Set(map.values())] // ['a', 'b']
             </code>
         </pre>
     </section>
@@ -788,25 +787,17 @@
     <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-            // #1: API: Simple API
-            // ---------------------------------------------------------------------
-            var weakMap = new WeakMap()
-            var key = { foo: 1 }
+                // #1: API: Errors
+                // --------------------------------------------------
+                new WeakMap(1)
+                // TypeError: (var)[Symbol.iterator] is not a function
 
-            weakMap.set(1, 4) // TypeError: Invalid value used as weak map key
-            weakMap.set([1], 5) // WeakMap { [1] => 5 }
-            weakMap.set(key, 6) // WeakMap { [1] => 5, {foo: 1} => 6 }
+                new WeakMap([1]) // ... or ....
+                new WeakMap(new Set([1]))
+                // TypeError: Iterator value 1 is not an entry object
 
-            weakMap.get([1, 2, 3]) // undefined
-            weakMap.get(key) // 6
-
-            weakMap.has([1]) // false
-            weakMap.has(key) // true
-
-            weakMap.delete([1]) // false
-            weakMap.delete(key) // true
-
-            // no further methods...
+                new WeakMap(new Set([1]).entries())
+                // TypeError: Invalid value used as weak map key
             </code>
         </pre>
     </section>
@@ -814,16 +805,92 @@
     <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-            // #2: API: Casting
-            // ---------------------------------------------------------------------
+                // #2: API: Simple API
+                // --------------------------------------------------
+                var weakMap = new WeakMap()
+                var key = { foo: 1 }
 
-            // Cast to "string"
-            String(new WeakMap) === "[object WeakMap]"
+                weakMap.set(1, 4) // TypeError: Invalid value used as weak map key
+                weakMap.set([1], 5) // WeakMap { [1] => 5 }
+                weakMap.set(key, 6) // WeakMap { [1] => 5, {foo: 1} => 6 }
 
+                weakMap.get([1, 2, 3]) // undefined
+                weakMap.get(key) // 6
+            </code>
+        </pre>
+    </section>
 
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #2: API: Simple API vol. 2
+                // --------------------------------------------------
+                // ....
 
+                weakMap.has([1]) // false
+                weakMap.has(key) // true
 
+                weakMap.delete([1]) // false
+                weakMap.delete(key) // true
 
+                // no further methods and properties...
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #3: API: Casting
+                // --------------------------------------------------
+
+                // Cast to "string"
+                String(new WeakMap) === "[object WeakMap]"
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #4: API: "Holy" couple key/value
+                // --------------------------------------------------
+                var weakMap = new WeakMap()
+
+                weakMap.set([1, 2], Math.random())
+                weakMap.set([1, 2], Math.random())
+                weakMap.set([1, 2], Math.random())
+
+                weakMap.size // ??? undefined
+
+                weakMap // WeakMap {[1, 2] => 0.609..., [1, 2] => 0.268..., [1, 2] => 0.183...}
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #1: Example
+                // --------------------------------------------------
+                var users = [{ name: 'Peter' }, { name: 'Kate' }];
+                var weakMap = new WeakMap();
+
+                weakMap.set(users[0], 'some info 1');
+                weakMap.set(users[1], 'some info 2');
+
+                console.log(weakMap.get(users[0])); // 'some info 1'
+                users.splice(0, 1);
+                console.log(weakMap.get(users[0])); // 'some info 2'
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #1: Example
+                // --------------------------------------------------
 
             </code>
         </pre>
@@ -832,17 +899,9 @@
     <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-            // #3: API: Errors
-            // ---------------------------------------------------------------------
-            new WeakMap(1)
-            // TypeError: (var)[Symbol.iterator] is not a function
-
-            new WeakMap([1])
-            new WeakMap(new Set([1]))
-            // TypeError: Iterator value 1 is not an entry object
-
-            new WeakMap(new Set([1]).entries())
-            // TypeError: Invalid value used as weak map key
+                // #2: Example: TC39
+                // --------------------------------------------------
+                // Korzystając z przykładów podczas tworzenie definicji dla specyfikacji
             </code>
         </pre>
     </section>
@@ -850,19 +909,50 @@
     <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-            // #4: API: "Holy" couple key/value
-            // ---------------------------------------------------------------------
-            var weakMap = new WeakMap()
-
-            weakMap.set([1, 2, 3], Math.random())
-            weakMap.set([1, 2, 3], Math.random()) // ehh...
-            weakMap.set([1, 2, 3], Math.random()) // ehh...
-
-
-
-
+                // #3: Example: DOM
+                // --------------------------------------------------
+                // Przypisać do elementów DOMa jakieś właściwości (zamiast do atrybutów tego elementu)
             </code>
         </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #4: Example: Book ExploringJS: Cache
+                // --------------------------------------------------
+                //
+                // Code inside the book.
+            </code>
+        </pre>
+
+        <a href="http://exploringjs.com/es6/ch_maps-sets.html#_caching-computed-results-via-weakmaps">http://exploringjs.com/es6/ch_maps-sets.html#_caching-computed-results-via-weakmaps</a>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #5: Example: Book ExploringJS: Observer pattern
+                // --------------------------------------------------
+                //
+                // Code inside the book.
+            </code>
+        </pre>
+
+        <a href="http://exploringjs.com/es6/ch_maps-sets.html#_managing-listeners">http://exploringjs.com/es6/ch_maps-sets.html#_managing-listeners</a>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #5: Example: Book ExploringJS: Keep private data
+                // --------------------------------------------------
+                //
+                // Code inside the book.
+            </code>
+        </pre>
+
+        <a href="http://exploringjs.com/es6/ch_maps-sets.html#_keeping-private-data-via-weakmaps">http://exploringjs.com/es6/ch_maps-sets.html#_keeping-private-data-via-weakmaps</a>
     </section>
 
     <section class="slide">
@@ -879,17 +969,53 @@
     <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-            // #1: API: Problem with constructor
-            // ---------------------------------------------------------------------
+                // #1: API: Problem with constructor
+                // --------------------------------------------------
 
-            new WeakSet([1, 2, 3]);
-            // TypeError: Invalid value used in weak set
+                new WeakSet([1, 2, 3]);
+                // TypeError: Invalid value used in weak set
 
-            new WeakSet(1, 2, 3);
-            // TypeError: (var)[Symbol.iterator] is not a function
+                new WeakSet(1, 2, 3);
+                // TypeError: (var)[Symbol.iterator] is not a function
+            </code>
+        </pre>
+    </section>
 
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #2: API: Simple API
+                // --------------------------------------------------
+                // Adding ONLY objects
+                weakSet.add([1])
+                weakSet.add(1) // TypeError: Invalid value used in weak set
 
+                // Checking by reference (not value)
+                weakSet.has([1]) // false
 
+                // Remove by reference too.
+                weakSet.delete([1]) // false
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #3: API: Cast
+                // --------------------------------------------------
+
+                // Cast to "string"
+                String(new WeakSet) === '[object WeakSet]'
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #1: Example
+                // --------------------------------------------------
 
             </code>
         </pre>
@@ -898,57 +1024,9 @@
     <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-            // #2: API: Simple API
-            // ---------------------------------------------------------------------
-            // Adding only objects (Array, Function, RegExp, Object)
-            weakSet.add(1) // TypeError: Invalid value used in weak set
-            weakSet.add([1]) // WeakSet {[1]}
+                // #2: Example
+                // --------------------------------------------------
 
-            // Checking by reference (not value)
-            weakSet.has([1]) // false
-
-            // Remove by reference too.
-            weakSet.delete([1]) // false
-            console.log(weakSet) // WeakSet {[1]}
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #3: API: Cast
-            // ---------------------------------------------------------------------
-
-            // Cast to "string"
-            String(new WeakSet) === '[object WeakSet]'
-
-
-
-
-
-
-
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-            // #4: Example: Remove duplicated objects (ONLY)
-            // ---------------------------------------------------------------------
-            var o = { foo: 1 }
-            var advanced = [ o, { foo: 2 }, { foo: 3 }, o ];
-
-            [...new Set(advanced)] // Array[3]
-            [...new WeakSet(advanced)]
-            // TypeError: (intermediate value)[Symbol.iterator] is not a function
-
-            var weakSet = new WeakSet();
-            advanced.forEach(weakSet.add.bind(weakSet))
-            // WeakSet {Object {foo: 1}, Object {foo: 2}, Object {foo: 3}}
-            // ...but Set is ensure that
             </code>
         </pre>
     </section>
@@ -956,6 +1034,33 @@
     <section class="slide">
         <h2 class="shout">So, why <code>WeakSet</code> is cool?</h2>
     </section>
+
+    <section class="slide compact">
+        <h2>Sources</h2>
+
+        <ul>
+            <li><a href="https://github.com/rwaldron/tc39-notes/">https://github.com/rwaldron/tc39-notes/</a></li>
+            <li><a href="http://exploringjs.com/es6/ch_maps-sets.html#sec_weakmap">http://exploringjs.com/es6/ch_maps-sets.html#sec_weakmap</a></li>
+            <li><a href="https://github.com/piecioshka/concept-assets-loader">https://github.com/piecioshka/concept-assets-loader</a></li>
+            <li><a href="https://github.com/piecioshka/test-es2015-proxy">https://github.com/piecioshka/test-es2015-proxy</a></li>
+            <li><a href="https://github.com/piecioshka/test-es6-map">https://github.com/piecioshka/test-es6-map</a></li>
+            <li><a href="https://github.com/piecioshka/test-es6-map-foreach">https://github.com/piecioshka/test-es6-map-foreach</a></li>
+            <li><a href="https://gist.github.com/ebidel/1b553d571f924da2da06">https://gist.github.com/ebidel/1b553d571f924da2da06</a></li>
+            <li><a href="https://www.nczonline.net/newsletter/archive/4078df5df5/">https://www.nczonline.net/newsletter/archive/4078df5df5/</a></li>
+            <li><a href="http://stackoverflow.com/questions/18808226/why-is-typeof-null-object">http://stackoverflow.com/questions/18808226/why-is-typeof-null-object</a></li>
+            <li><a href="http://egorsmirnov.me/assets/berlin-angular-meetup-26/">http://egorsmirnov.me/assets/berlin-angular-meetup-26/</a></li>
+        </ul>
+    </section>
+
+    <section class="slide prism">
+        <h2 class="shout grow">Thanks &#x1F44F;<br/><span style="color: #999">Next meetup:</span><br/><mark style="font-size: 110px">12-10-2016</mark></h2>
+    </section>
+
+    <!--
+
+    Tutaj będzie niespodzianka, bo mam jeszcze kilka slajdów dodatkowych o smaczkach w JavaScript.
+
+    -->
 
     <section class="slide photo photo-6">
         <h2 class="shout">Hints</h2>
@@ -965,14 +1070,14 @@
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
                 window.name = { foo: 1 }
-                console.log(window.name) // => [object Object]
+                console.log(window.name) // [object Object]
                 // what happen here?
                 // [immutable type]
 
                 const object = {};
                 object.a = 1;
-                console.log(object.a) // => 1
-                // why we can do that?
+                console.log(object.a) // 1
+                // why we can do this?
                 // [immutable reference]
             </code>
         </pre>
@@ -981,12 +1086,12 @@
     <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-                typeof null === 'object' // => true
+                typeof null === 'object' // true
                 // why?
                 // [empty reference to object]
 
-                Number.isFinite('1.2') // => false
-                isFinite('1.2') // => true
+                Number.isFinite('1.2') // false
+                isFinite('1.2') // true
                 // OMG
                 // [more robust]
 
@@ -1002,14 +1107,14 @@
 
         <pre style="font-size: 45px;" class="language-javascript line-numbers">
             <code>
-            Object.observe(object, (changes) => {
-                console.log(changes);
-            })
+                Object.observe(object, (changes) => {
+                    console.log(changes);
+                })
 
-            // but today...
-            Object.observe // => undefined
+                // but today...
+                Object.observe // undefined
 
-            // what can I do? use Proxy!
+                // what can I do? use Proxy!
             </code>
         </pre>
     </section>
@@ -1032,37 +1137,36 @@
         </pre>
     </section>
 
-    <section class="slide compact">
-        <h2>Sources</h2>
-
-        <ul>
-            <li><a href="https://github.com/piecioshka/concept-assets-loader">https://github.com/piecioshka/concept-assets-loader</a></li>
-            <li><a href="https://github.com/piecioshka/test-es2015-proxy">https://github.com/piecioshka/test-es2015-proxy</a></li>
-            <li><a href="https://github.com/piecioshka/test-es6-map">https://github.com/piecioshka/test-es6-map</a></li>
-            <li><a href="https://github.com/piecioshka/test-es6-map-foreach">https://github.com/piecioshka/test-es6-map-foreach</a></li>
-            <li><a href="https://gist.github.com/ebidel/1b553d571f924da2da06">https://gist.github.com/ebidel/1b553d571f924da2da06</a></li>
-            <li><a href="https://www.nczonline.net/newsletter/archive/4078df5df5/">https://www.nczonline.net/newsletter/archive/4078df5df5/</a></li>
-            <li><a href="http://stackoverflow.com/questions/18808226/why-is-typeof-null-object">http://stackoverflow.com/questions/18808226/why-is-typeof-null-object</a></li>
-        </ul>
-    </section>
-
     <section class="slide prism">
         <pre style="font-size: 18px;" class="language-javascript line-numbers">
             <code>
             // TODO
-            // - stworzyć historię
-            // - weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kolekcjach
-            // - przebadać WeakMap oraz WeakSet pod kątem Memory Leak (prawdopodobnie klucze są usuwane przez GC)
-            // - benchmarking? https://github.com/bestiejs/benchmark.js
-            // - dodać przykłady wykorzystania WeakSet i WeakMap (korzystając z przykładów podczas tworzenie definicji dla specyfikacji)
-            // - subclassing of Map, Set
-            // - przerobić tak, aby nie skrolować slajdów do dołu
-            // - przetestować wsparcie w przeglądarkach
             // - zgrupować podobne cechy i podstawowe różnice
-            // WeakSet: cache, observer pattern (WeakReferences)
+            // - Map
+            //   - subclassing of Map
+            //   - weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kolekcjach
+            //   - benchmarking? https://github.com/bestiejs/benchmark.js
+            // - Set
+            //   - weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kolekcjach
+            //   - benchmarking? https://github.com/bestiejs/benchmark.js
+            // - WeakMap
+            //   - weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kolekcjach
+            //   - przebadać WeakMap oraz WeakSet pod kątem Memory Leak (prawdopodobnie klucze są usuwane przez GC)
+            //   - benchmarking? https://github.com/bestiejs/benchmark.js
+            // - WeakSet
+            //   - weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kolekcjach
+            //   - przebadać WeakMap oraz WeakSet pod kątem Memory Leak (prawdopodobnie klucze są usuwane przez GC)
+            //   - benchmarking? https://github.com/bestiejs/benchmark.js
+            //   - przykłady:
+            //     - korzystając z przykładów podczas tworzenie definicji dla specyfikacji
             // Zwroty:
             //     - BEFORE: zbadać (będąc w PM) ile można ustawić padding na slajdzie "compact"
-            //     - BEFORE: ustawić zegarek, aby mierzył czas (po 20 minutach alarm)
+            //     - BEFORE: ustawić zegarek: http://marcin93.github.com/timer
+            //     - BEFORE: ustawić alarm po 20 minutach
+            //     - INFO: będę pokazywał na podstawie porównania do "object" oraz "array"
+            //     - INFO: gdy poznawałem te kolekcje to nie czytałem spec, tylko testowałem w realu (potem oczywiście przeczytałem spec)
+            //     - INFO: nie używam średników, aby zmniejszyć liczbę znaków
+            //     - INFO: używam 'var' zamiast 'let' bo testowałem przykłady w DevTools > Sources > Snippets
             //     - za nim prezentacja to bardzo dziękuję, za tak liczne przybycie na nasze 2 urodziny
             //     - jeśli jesteście gdzieś gdzie jest ograniczona widoczność to zapraszam na link
             //     - może na początku się przedstawię
@@ -1072,10 +1176,6 @@
             //     - jesteście najlepszą publiczności przed jaką dzisiaj występowałem
             </code>
         </pre>
-    </section>
-
-    <section class="slide prism">
-        <h2 class="shout grow">Thanks &#x1F44F;<br/><span style="color: #999">Next meetup:</span><br/><mark style="font-size: 110px">12-10-2016</mark></h2>
     </section>
 
     <div class="progress"></div>
