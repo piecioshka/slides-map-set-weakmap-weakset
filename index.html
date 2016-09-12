@@ -274,6 +274,55 @@
         </table>
     </section>
 
+    <section class="slide compact">
+        <h2>Memory allocation: <mark>Lightweight is Array</mark></h2>
+
+        <table class="striped" style="font-size: 34px">
+            <tr>
+                <th>Type</th>
+                <th>totalJSHeapSize</th>
+                <th>usedJSHeapSize</th>
+                <th>jsHeapSizeLimit</th>
+            </tr>
+            <tr>
+                <td>Object</td>
+                <td>7.977 KB</td>
+                <td>7.977 KB</td>
+                <td>0B</td>
+            </tr>
+            <tr>
+                <td>Array</td>
+                <td>5.281 KB</td>
+                <td>5.281 KB</td>
+                <td>0B</td>
+            </tr>
+            <tr>
+                <td>Map</td>
+                <td>28.625 KB</td>
+                <td>28.625 KB</td>
+                <td>0B</td>
+            </tr>
+            <tr>
+                <td>Set</td>
+                <td>13.219 KB</td>
+                <td>13.219 KB</td>
+                <td>0B</td>
+            </tr>
+            <tr>
+                <td>WeakMap</td>
+                <td>15.844 KB</td>
+                <td>15.844 KB</td>
+                <td>0B</td>
+            </tr>
+            <tr>
+                <td>WeakSet</td>
+                <td>9.484 KB</td>
+                <td>9.484 KB</td>
+                <td>0B</td>
+            </tr>
+        </table>
+    </section>
+
     <section class="slide">
         <h2 class="shout">Which collection is the best&#x2049;&#xFE0F;</h2>
     </section>
@@ -1085,6 +1134,8 @@
             <li><a href="https://github.com/piecioshka/test-es2015-proxy">https://github.com/piecioshka/test-es2015-proxy</a></li>
             <li><a href="https://github.com/piecioshka/test-es6-map">https://github.com/piecioshka/test-es6-map</a></li>
             <li><a href="https://github.com/piecioshka/test-es6-map-foreach">https://github.com/piecioshka/test-es6-map-foreach</a></li>
+            <li><a href="https://github.com/piecioshka/test-memory-heap">https://github.com/piecioshka/test-memory-heap</a></li>
+            <li><a href="https://github.com/piecioshka/test-benchmark">https://github.com/piecioshka/test-benchmark</a></li>
         </ul>
     </section>
 
@@ -1178,14 +1229,7 @@
             <code>
             // TODO
             // - zgrupować podobne cechy i podstawowe różnice
-            // - Map
-            //   - weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kolekcjach
-            // - Set
-            //   - weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kolekcjach
-            // - WeakMap
-            //   - weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kolekcjach
             // - WeakSet
-            //   - weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kolekcjach
             //   - przykłady:
             //     - korzystając z przykładów podczas tworzenie definicji dla specyfikacji
             // Zwroty:
