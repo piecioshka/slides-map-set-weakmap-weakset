@@ -509,6 +509,24 @@
         </pre>
     </section>
 
+    <section class="slide prism">
+        <pre style="font-size: 25px;" class="language-javascript line-numbers">
+            <code>
+                // #3: Example: Subclassing of Map
+                // --------------------------------------------------
+                class MultiMap extends Map {
+                    set(...args) {
+                        args.map(([key, value]) => super.set(key, value));
+                        return this;
+                    }
+                }
+                var map = new MultiMap();
+                map.set(['key', 'value'], ['key2', 'value2']);
+                // Map {"key" => "value", "key2" => "value2"}
+            </code>
+        </pre>
+    </section>
+
     <section class="slide">
         <h2 class="shout">So, why <code>Map</code> is cool?</h2>
     </section>
@@ -1106,7 +1124,6 @@
             // TODO
             // - zgrupować podobne cechy i podstawowe różnice
             // - Map
-            //   - subclassing of Map
             //   - weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kolekcjach
             //   - benchmarking? https://github.com/bestiejs/benchmark.js
             // - Set
