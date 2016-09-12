@@ -1,0 +1,17 @@
+.above-cover {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    top: 150px;
+    font-size: 60px;
+}
+
+.below-cover {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    top: 380px;
+    font-size: 60px;
+}

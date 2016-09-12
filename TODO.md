@@ -3,7 +3,7 @@
 * zamiana `var` na `let`
 * zrobić projekt na wszystkie `snippets`
 * przesłuchać nagrania
-* przećwiczyć prezentację
+* dodać napis dot. tego, że jestem mentorem
 
 ## Zwroty
 
