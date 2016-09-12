@@ -1,11 +1,11 @@
 # TODO (In polish)
 
-* zgrupować podobne cechy i podstawowe różnice
-* WeakSet
-  * przykłady:
-    * korzystając z przykładów podczas tworzenie definicji dla specyfikacji
+* zamiana `var` na `let`
+* zrobić projekt na wszystkie `snippets`
+* przesłuchać nagrania
+* przećwiczyć prezentację
 
-# Zwroty
+## Zwroty
 
 * BEFORE: zbadać (będąc w PM) ile można ustawić padding na slajdzie "compact"
 * BEFORE: ustawić zegarek: http://marcin93.github.com/timer
@@ -19,10 +19,10 @@
 * INFO: jeśli jesteście gdzieś gdzie jest ograniczona widoczność to zapraszam na link
 * INFO: może na początku się przedstawię
 * .
-* `length` jest do kolekcji indeksowanej, a `size` już nie
+* `length` jest do list, a `size` jest do kolekcji uporządkowanych
 * .
 * kto z was na co dzień używa Map albo Set? i dlaczego?
 * .
 * `WeakSet`, jest taki super prostym workiem, ale z inteligencją! 
-* .
+* odnośnie `WeakMap` i `WeakSet` dlaczego kluczami mogą być tylko obiekty?
 * jesteście najlepszą publiczności przed jaką dzisiaj występowałem

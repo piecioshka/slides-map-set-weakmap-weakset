@@ -108,6 +108,25 @@
                 console.log(MAP[foo]); // ???
             </code>
         </pre>
+
+        <p class="note">My interview question.</p>
+    </section>
+
+    <section class="slide prism">
+        <h2>I &#x2764; Map</h2>
+
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                var MAP = new Map();
+                var foo = { name: 'foo' };
+                var bar = { name: 'bar' };
+
+                MAP.set(foo, "Hello");
+                MAP.set(bar, "World");
+
+                console.log(MAP.get(foo)); // ???
+            </code>
+        </pre>
     </section>
 
     <section class="slide">
@@ -533,8 +552,8 @@
                 map.set(['win8', 'moz'], 'a')
                 map.set(['xp', 'firefox'], 'b')
 
-                function check(list, ...browsers) {
-                    for (let [key, value] of list)
+                function check(collection, ...browsers) {
+                    for (let [key, value] of collection)
                         if (String(browsers) === String(key))
                             return value
                 }
@@ -698,6 +717,21 @@
 
                 // Cast to "string"
                 String(new Set) === "[object Set]"
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #8: API: Adding without coercing
+                // --------------------------------------------------
+
+                let set = new Set();
+                set.add(5);
+                set.add("5");
+
+                console.log(set.size); // 2
             </code>
         </pre>
     </section>
@@ -974,9 +1008,9 @@
 
         <ul>
             <li>StackOverflow: Link DOM element with any attributes</li>
-            <li>Book ExploringJS: Cache: <a href="http://exploringjs.com/es6/ch_maps-sets.html#_caching-computed-results-via-weakmaps">http://exploringjs.com/es6/ch_maps-sets.html#_caching-computed-results-via-weakmaps</a></li>
-            <li>Book ExploringJS: Observer pattern: <a href="http://exploringjs.com/es6/ch_maps-sets.html#_managing-listeners">http://exploringjs.com/es6/ch_maps-sets.html#_managing-listeners</a></li>
-            <li>Book ExploringJS: Keep private data: <a href="http://exploringjs.com/es6/ch_maps-sets.html#_keeping-private-data-via-weakmaps">http://exploringjs.com/es6/ch_maps-sets.html#_keeping-private-data-via-weakmaps</a></li>
+            <li>Book ExploringJS: Cache:<br/><a href="http://exploringjs.com/es6/ch_maps-sets.html#_caching-computed-results-via-weakmaps">http://exploringjs.com/es6/ch_maps-sets.html#_caching-computed-results-via-weakmaps</a></li>
+            <li>Book ExploringJS: Observer pattern:<br/><a href="http://exploringjs.com/es6/ch_maps-sets.html#_managing-listeners">http://exploringjs.com/es6/ch_maps-sets.html#_managing-listeners</a></li>
+            <li>Book ExploringJS: Keep private data:<br/><a href="http://exploringjs.com/es6/ch_maps-sets.html#_keeping-private-data-via-weakmaps">http://exploringjs.com/es6/ch_maps-sets.html#_keeping-private-data-via-weakmaps</a></li>
         </ul>
     </section>
 
@@ -1067,11 +1101,10 @@
     </section>
 
     <section class="slide compact">
-        <h2>More examples of using WeakMap</h2>
+        <h2>More examples of using WeakSet</h2>
 
         <ul>
-            <li>TC39 (Domenic Denicola) Branding: <a href="https://esdiscuss.org/topic/actual-weakset-use-cases">https://esdiscuss.org/topic/actual-weakset-use-cases</a></li>
-            <li>...</li>
+            <li>TC39 (Domenic Denicola) Branding:<br/><a href="https://esdiscuss.org/topic/actual-weakset-use-cases">https://esdiscuss.org/topic/actual-weakset-use-cases</a></li>
         </ul>
     </section>
 
@@ -1112,6 +1145,18 @@
                 <td><code>202,026</code> ops/sec ±1.91% (82 runs sampled)</td>
             </tr>
         </table>
+    </section>
+
+    <section class="slide">
+        <h2>Similarities</h2>
+
+        <ul>
+            <li><code>Map</code> &amp; <code>Set</code> can use primitives and objects as keys</li>
+            <li><code>WeakMap</code> &amp; <code>WeakSet</code> can use ONLY objects as keys</li>
+            <li><code>WeakMap</code> &amp; <code>WeakSet</code> didn't have <code>size</code> property</li>
+            <li><code>WeakMap</code> &amp; <code>WeakSet</code> didn't have <code>forEach</code> method</li>
+            <li><code>WeakMap</code> &amp; <code>WeakSet</code> are reduce automatically by GC</li>
+        </ul>
     </section>
 
     <section class="slide compact">
