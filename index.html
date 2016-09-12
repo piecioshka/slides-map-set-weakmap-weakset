@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="modules/overlay-bars.css">
     <link rel="stylesheet" href="modules/birthday.css">
     <link rel="stylesheet" href="modules/a-lot-stuff.css">
+    <link rel="stylesheet" href="modules/fullscreen-picture.css">
 </head>
 <body class="shower list">
     <header class="caption">
@@ -889,7 +890,7 @@
     <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-                // #1: Example
+                // #5: API: How it works?
                 // --------------------------------------------------
                 var users = [{ name: 'Peter' }, { name: 'Kate' }];
                 var weakMap = new WeakMap();
@@ -905,15 +906,15 @@
     </section>
 
     <section class="slide">
-        <img class="cover" src="pictures/weakmap/logs.png" alt="">
+        <img class="cover fullscreen-picture" src="pictures/weakmap/logs.png" alt="">
     </section>
 
     <section class="slide">
-        <img class="cover" src="pictures/weakmap/gc-activate-log.png" alt="">
+        <img class="cover fullscreen-picture" src="pictures/weakmap/gc-activate-log.png" alt="">
     </section>
 
     <section class="slide">
-        <img class="cover" src="pictures/weakmap/gc-activate-timeline.png" alt="">
+        <img class="cover fullscreen-picture" src="pictures/weakmap/gc-activate-timeline.png" alt="">
     </section>
 
     <section class="slide compact">
@@ -985,23 +986,41 @@
     </section>
 
     <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+        <pre style="font-size: 21px;" class="language-javascript line-numbers">
             <code>
-                // #1: Example
+                // #4: API: How it works?
                 // --------------------------------------------------
+                var users = [{ name: 'Peter' }, { name: 'Kate' }];
+                var weakSet = new WeakSet();
 
+                weakSet.add(users[0]);
+                weakSet.add(users[1]);
+
+                console.log(weakSet) // WeakSet {Object {name: "Kate"}, Object {name: "Peter"}}
+                users.splice(0, 1);
+                console.log(weakSet) // WeakSet {Object {name: "Kate"}, Object {name: "Peter"}}
             </code>
         </pre>
     </section>
 
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-                // #2: Example
-                // --------------------------------------------------
+    <section class="slide">
+        <img class="cover fullscreen-picture" src="pictures/weakset/logs.png" alt="">
+    </section>
 
-            </code>
-        </pre>
+    <section class="slide">
+        <img class="cover fullscreen-picture" src="pictures/weakset/gc-activate-log.png" alt="">
+    </section>
+
+    <section class="slide">
+        <img class="cover fullscreen-picture" src="pictures/weakset/gc-activate-timeline.png" alt="">
+    </section>
+
+    <section class="slide compact">
+        <h2>More examples of using WeakMap</h2>
+
+        <ul>
+            <li>...</li>
+        </ul>
     </section>
 
     <section class="slide">
@@ -1027,6 +1046,7 @@
         <ul>
             <li><a href="https://github.com/piecioshka/concept-assets-loader">https://github.com/piecioshka/concept-assets-loader</a></li>
             <li><a href="https://github.com/piecioshka/test-es2015-weakmap">https://github.com/piecioshka/test-es2015-weakmap</a></li>
+            <li><a href="https://github.com/piecioshka/test-es2015-weakset">https://github.com/piecioshka/test-es2015-weakset</a></li>
             <li><a href="https://github.com/piecioshka/test-es2015-proxy">https://github.com/piecioshka/test-es2015-proxy</a></li>
             <li><a href="https://github.com/piecioshka/test-es6-map">https://github.com/piecioshka/test-es6-map</a></li>
             <li><a href="https://github.com/piecioshka/test-es6-map-foreach">https://github.com/piecioshka/test-es6-map-foreach</a></li>
@@ -1134,7 +1154,6 @@
             //   - benchmarking? https://github.com/bestiejs/benchmark.js
             // - WeakSet
             //   - weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kolekcjach
-            //   - przebadać WeakMap oraz WeakSet pod kątem Memory Leak (prawdopodobnie klucze są usuwane przez GC)
             //   - benchmarking? https://github.com/bestiejs/benchmark.js
             //   - przykłady:
             //     - korzystając z przykładów podczas tworzenie definicji dla specyfikacji
