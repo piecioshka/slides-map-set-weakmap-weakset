@@ -239,6 +239,41 @@
         </table>
     </section>
 
+    <section class="slide compact">
+        <h2>Benchmark: <mark>Fastest is Object</mark></h2>
+
+        <table class="striped" style="font-size: 36px">
+            <tr>
+                <th>Type</th>
+                <th>Operations / seconds</th>
+            </tr>
+            <tr>
+                <td>Object</td>
+                <td><code>2,590,044</code> ops/sec ±6.32% (72 runs sampled)</td>
+            </tr>
+            <tr>
+                <td>Array</td>
+                <td><code>675,882</code> ops/sec ±13.49% (65 runs sampled)</td>
+            </tr>
+            <tr>
+                <td>Map</td>
+                <td><code>152,399</code> ops/sec ±9.67% (63 runs sampled)</td>
+            </tr>
+            <tr>
+                <td>Set</td>
+                <td><code>184,469</code> ops/sec ±6.27% (78 runs sampled)</td>
+            </tr>
+            <tr>
+                <td>WeakMap</td>
+                <td><code>199,211</code> ops/sec ±1.93% (82 runs sampled)</td>
+            </tr>
+            <tr>
+                <td>WeakSet</td>
+                <td><code>202,026</code> ops/sec ±1.91% (82 runs sampled)</td>
+            </tr>
+        </table>
+    </section>
+
     <section class="slide">
         <h2 class="shout">Which collection is the best&#x2049;&#xFE0F;</h2>
     </section>
@@ -1145,16 +1180,12 @@
             // - zgrupować podobne cechy i podstawowe różnice
             // - Map
             //   - weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kolekcjach
-            //   - benchmarking? https://github.com/bestiejs/benchmark.js
             // - Set
             //   - weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kolekcjach
-            //   - benchmarking? https://github.com/bestiejs/benchmark.js
             // - WeakMap
             //   - weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kolekcjach
-            //   - benchmarking? https://github.com/bestiejs/benchmark.js
             // - WeakSet
             //   - weryfikacja pamięci (ile zajmują dane) przy takich samych danych w różnych kolekcjach
-            //   - benchmarking? https://github.com/bestiejs/benchmark.js
             //   - przykłady:
             //     - korzystając z przykładów podczas tworzenie definicji dla specyfikacji
             // Zwroty:
