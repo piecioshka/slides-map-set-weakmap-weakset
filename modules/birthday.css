@@ -7,3 +7,14 @@
     font-size: 600px;
     color: #f7302f;
 }
+
+.birthday .years ~ sup {
+    position: absolute;
+    left: 280px;
+    top: -210px;
+    width: 140px;
+    height: 730px;
+    line-height: 160px;
+    color: #f7302f;
+    font-weight: bold;
+}

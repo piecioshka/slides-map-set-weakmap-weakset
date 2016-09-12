@@ -31,7 +31,7 @@
 
     <section class="slide birthday">
         <h2 class="shout grow">
-            <span class="years">2</span>
+            <span class="years">2</span><sup>nd</sup>
             <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;birthday&#x1F382;</span>
         </h2>
     </section>
@@ -130,7 +130,7 @@
     </section>
 
     <section class="slide">
-        <h2 class="shout">What collections<br/>we have&#x2049;&#xFE0F;</h2>
+        <h2 class="shout">What collections<br/>have we got&#x2049;&#xFE0F;</h2>
     </section>
 
     <section class="slide compact a-lot-stuff">
@@ -276,7 +276,7 @@
     </section>
 
     <section class="slide compact">
-        <h2>Memory allocation: <mark>Lightweight is Array</mark></h2>
+        <h2>Memory allocation: <mark>Array is lightweight</mark></h2>
 
         <table class="striped" style="font-size: 34px">
             <tr>
@@ -485,7 +485,7 @@
                 // Comparison of 2 maps will fail, just as arrays.
                 (map === map2) // false
 
-                // But I have hope :)
+                // But I still have hope :)
             </code>
         </pre>
     </section>
@@ -842,7 +842,7 @@
                 array.forEach(set.add.bind(set))
                 console.log(set) // [1, 2, 3, 4, 5, 6]
 
-                // Without `bind` some error occur:
+                // Without `bind` some error occurs:
                 //   TypeError: Method Set.prototype.add called
                 //   on incompatible receiver undefined
             </code>
@@ -856,7 +856,7 @@
                 // --------------------------------------------------
                 var array = [1, 2, 3, 1, 3]
 
-                // Constructor expect another collection
+                // Constructor expects another collection
                 [...new Set(array)] // [1, 2, 3]
             </code>
         </pre>
@@ -1113,7 +1113,7 @@
     </section>
 
     <section class="slide compact">
-        <h2>Benchmark: <mark>Fastest is Object</mark></h2>
+        <h2>Benchmark: <mark>Object is fastest</mark></h2>
 
         <table class="striped" style="font-size: 33px">
             <tr>
@@ -1153,9 +1153,9 @@
         <ul>
             <li><code>Map</code> &amp; <code>Set</code> can use primitives and objects as keys</li>
             <li><code>WeakMap</code> &amp; <code>WeakSet</code> can use ONLY objects as keys</li>
-            <li><code>WeakMap</code> &amp; <code>WeakSet</code> didn't have <code>size</code> property</li>
-            <li><code>WeakMap</code> &amp; <code>WeakSet</code> didn't have <code>forEach</code> method</li>
-            <li><code>WeakMap</code> &amp; <code>WeakSet</code> are reduce automatically by GC</li>
+            <li><code>WeakMap</code> &amp; <code>WeakSet</code> don't have <code>size</code> property</li>
+            <li><code>WeakMap</code> &amp; <code>WeakSet</code> don't have <code>forEach</code> method</li>
+            <li><code>WeakMap</code> &amp; <code>WeakSet</code> held items weakly, so GC will remove its when are unused</li>
         </ul>
     </section>
 
@@ -1275,7 +1275,7 @@
     </section>
 
     <section class="slide prism">
-        <h2 class="shout grow">Thanks &#x1F44F;<br/><span style="color: #999; font-size: 110px;">Did you remember when will be next meetup&#x2049;&#xFE0F;</span></h2>
+        <h2 class="shout grow">Thanks &#x1F44F;<br/><span style="color: #999; font-size: 110px;">Do you remember when will be next meetup&#x2049;&#xFE0F;</span></h2>
     </section>
 
     <div class="progress"></div>
