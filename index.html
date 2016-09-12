@@ -93,6 +93,23 @@
         </div>
     </section>
 
+    <section class="slide prism">
+        <h2>Can you explain what happen here?</h2>
+
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                var MAP = {};
+                var foo = { name: 'foo' };
+                var bar = { name: 'bar' };
+
+                MAP[foo] = "Hello";
+                MAP[bar] = "World";
+
+                console.log(MAP[foo]); // ???
+            </code>
+        </pre>
+    </section>
+
     <section class="slide">
         <h2 class="shout">What collections<br/>we have&#x2049;&#xFE0F;</h2>
     </section>
@@ -240,85 +257,36 @@
     </section>
 
     <section class="slide compact">
-        <h2>Benchmark: <mark>Fastest is Object</mark></h2>
-
-        <table class="striped" style="font-size: 36px">
-            <tr>
-                <th>Type</th>
-                <th>Operations / seconds</th>
-            </tr>
-            <tr>
-                <td>Object</td>
-                <td><code>2,590,044</code> ops/sec ±6.32% (72 runs sampled)</td>
-            </tr>
-            <tr>
-                <td>Array</td>
-                <td><code>675,882</code> ops/sec ±13.49% (65 runs sampled)</td>
-            </tr>
-            <tr>
-                <td>Map</td>
-                <td><code>152,399</code> ops/sec ±9.67% (63 runs sampled)</td>
-            </tr>
-            <tr>
-                <td>Set</td>
-                <td><code>184,469</code> ops/sec ±6.27% (78 runs sampled)</td>
-            </tr>
-            <tr>
-                <td>WeakMap</td>
-                <td><code>199,211</code> ops/sec ±1.93% (82 runs sampled)</td>
-            </tr>
-            <tr>
-                <td>WeakSet</td>
-                <td><code>202,026</code> ops/sec ±1.91% (82 runs sampled)</td>
-            </tr>
-        </table>
-    </section>
-
-    <section class="slide compact">
         <h2>Memory allocation: <mark>Lightweight is Array</mark></h2>
 
         <table class="striped" style="font-size: 34px">
             <tr>
                 <th>Type</th>
-                <th>totalJSHeapSize</th>
                 <th>usedJSHeapSize</th>
-                <th>jsHeapSizeLimit</th>
             </tr>
             <tr>
                 <td>Object</td>
                 <td>7.977 KB</td>
-                <td>7.977 KB</td>
-                <td>0B</td>
             </tr>
             <tr>
                 <td>Array</td>
                 <td>5.281 KB</td>
-                <td>5.281 KB</td>
-                <td>0B</td>
             </tr>
             <tr>
                 <td>Map</td>
                 <td>28.625 KB</td>
-                <td>28.625 KB</td>
-                <td>0B</td>
             </tr>
             <tr>
                 <td>Set</td>
                 <td>13.219 KB</td>
-                <td>13.219 KB</td>
-                <td>0B</td>
             </tr>
             <tr>
                 <td>WeakMap</td>
                 <td>15.844 KB</td>
-                <td>15.844 KB</td>
-                <td>0B</td>
             </tr>
             <tr>
                 <td>WeakSet</td>
                 <td>9.484 KB</td>
-                <td>9.484 KB</td>
-                <td>0B</td>
             </tr>
         </table>
     </section>
@@ -1112,6 +1080,41 @@
     </section>
 
     <section class="slide compact">
+        <h2>Benchmark: <mark>Fastest is Object</mark></h2>
+
+        <table class="striped" style="font-size: 33px">
+            <tr>
+                <th>Type</th>
+                <th>Operations / seconds</th>
+            </tr>
+            <tr>
+                <td>Object</td>
+                <td><code>2,590,044</code> ops/sec ±6.32% (72 runs sampled)</td>
+            </tr>
+            <tr>
+                <td>Array</td>
+                <td><code>675,882</code> ops/sec ±13.49% (65 runs sampled)</td>
+            </tr>
+            <tr>
+                <td>Map</td>
+                <td><code>152,399</code> ops/sec ±9.67% (63 runs sampled)</td>
+            </tr>
+            <tr>
+                <td>Set</td>
+                <td><code>184,469</code> ops/sec ±6.27% (78 runs sampled)</td>
+            </tr>
+            <tr>
+                <td>WeakMap</td>
+                <td><code>199,211</code> ops/sec ±1.93% (82 runs sampled)</td>
+            </tr>
+            <tr>
+                <td>WeakSet</td>
+                <td><code>202,026</code> ops/sec ±1.91% (82 runs sampled)</td>
+            </tr>
+        </table>
+    </section>
+
+    <section class="slide compact">
         <h2>Sources</h2>
 
         <ul>
@@ -1122,6 +1125,7 @@
             <li><a href="http://egorsmirnov.me/assets/berlin-angular-meetup-26/">http://egorsmirnov.me/assets/berlin-angular-meetup-26/</a></li>
             <li><a href="http://exploringjs.com/es6/ch_maps-sets.html">http://exploringjs.com/es6/ch_maps-sets.html</a></li>
             <li><a href="https://leanpub.com/understandinges6/read#leanpub-auto-sets-and-maps">https://leanpub.com/understandinges6/read#leanpub-auto-sets-and-maps</a></li>
+            <li><a href="http://codepen.io/piecioshka/pen/pJWqOy">http://codepen.io/piecioshka/pen/pJWqOy</a></li>
         </ul>
     </section>
 
@@ -1226,7 +1230,7 @@
     </section>
 
     <section class="slide prism">
-        <h2 class="shout grow">Thanks &#x1F44F;<br/><span style="color: #999">Remember when is next meetup&#x2049;&#xFE0F;</span></h2>
+        <h2 class="shout grow">Thanks &#x1F44F;<br/><span style="color: #999; font-size: 110px;">Did you remember when will be next meetup&#x2049;&#xFE0F;</span></h2>
     </section>
 
     <div class="progress"></div>
