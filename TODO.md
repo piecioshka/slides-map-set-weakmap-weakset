@@ -1,6 +1,7 @@
 # TODO (In polish)
 
 * przesłuchać nagrania
+* za mało zalet Map
 
 ## Help
 
