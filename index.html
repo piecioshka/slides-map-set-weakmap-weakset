@@ -104,14 +104,14 @@
 
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-                let MAP = {};
-                let foo = { name: 'foo' };
-                let bar = { name: 'bar' };
+                let MAP = {}
+                let foo = { name: 'foo' }
+                let bar = { name: 'bar' }
 
-                MAP[foo] = "Hello";
-                MAP[bar] = "World";
+                MAP[foo] = "Hello"
+                MAP[bar] = "World"
 
-                console.log(MAP[foo]); // ???
+                console.log(MAP[foo]) // ???
             </code>
         </pre>
 
@@ -123,14 +123,14 @@
 
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-                let MAP = new Map();
-                let foo = { name: 'foo' };
-                let bar = { name: 'bar' };
+                let MAP = new Map()
+                let foo = { name: 'foo' }
+                let bar = { name: 'bar' }
 
-                MAP.set(foo, "Hello");
-                MAP.set(bar, "World");
+                MAP.set(foo, "Hello")
+                MAP.set(bar, "World")
 
-                console.log(MAP.get(foo)); // ???
+                console.log(MAP.get(foo)) // ???
             </code>
         </pre>
     </section>
@@ -302,7 +302,7 @@
             <code>
                 // #1: API: Hashmap
                 // --------------------------------------------------
-                let map = new Map();
+                let map = new Map()
 
                 map.set('foo', 'bar')
                 // instead of: object[key] = value
@@ -405,8 +405,8 @@
             <code>
                 // #7: API: "Holy" couple key/value
                 // --------------------------------------------------
-                let map = new Map();
-                let rand = Math.random();
+                let map = new Map()
+                let rand = Math.random()
 
                 map.set([1, 2, 3], Math.random())
                 map.set([1, 2, 3], Math.random())
@@ -423,8 +423,8 @@
             <code>
                 // #8: API: .. but unique key!
                 // --------------------------------------------------
-                let map = new Map();
-                let rand = Math.random();
+                let map = new Map()
+                let rand = Math.random()
 
                 map.set('item', Math.random())
                 map.set('item', rand) // overwrite previous
@@ -481,12 +481,12 @@
                 // --------------------------------------------------
                 class MultiMap extends Map {
                     set(...args) {
-                        args.map(([key, value]) => super.set(key, value));
-                        return this;
+                        args.map(([key, value]) => super.set(key, value))
+                        return this
                     }
                 }
-                let map = new MultiMap();
-                map.set(['key', 'value'], ['key2', 'value2']);
+                let map = new MultiMap()
+                map.set(['key', 'value'], ['key2', 'value2'])
                 // Map {"key" => "value", "key2" => "value2"}
             </code>
         </pre>
@@ -559,12 +559,12 @@
                 // #8: API: Adding without coercing
                 // --------------------------------------------------
 
-                let set = new Set();
+                let set = new Set()
 
-                set.add(5);
-                set.add("5");
+                set.add(5)
+                set.add("5")
 
-                console.log(set.size); // 2
+                console.log(set.size) // 2
             </code>
         </pre>
     </section>
@@ -576,12 +576,12 @@
                 // --------------------------------------------------
                 function loadImage(path /* string */) {
                     return new Promise((resolve, reject) => {
-                        let image = new Image();
-                        let on = image.addEventListener;
+                        let image = new Image()
+                        let on = image.addEventListener
 
-                        on('load', () => resolve(image));
-                        on('error', () => reject(image));
-                        image.src = path;
+                        on('load', () => resolve(image))
+                        on('error', () => reject(image))
+                        image.src = path
                     })
                 }
             </code>
@@ -593,16 +593,16 @@
             <code>
                 // #1: Example: AssetsLoader: test case
                 // --------------------------------------------------
-                let al = new AssetsLoader();
-                al.addImage('../assets/images/plants.jpg');
-                al.addImage('../assets/images/sky.jpg');
+                let al = new AssetsLoader()
+                al.addImage('../assets/images/plants.jpg')
+                al.addImage('../assets/images/sky.jpg')
                 al.loadImages()
                     .catch((error) => {
-                        console.error(error);
+                        console.error(error)
                     })
                     .then((images) => {
-                        console.info('Loaded successful', images);
-                    });
+                        console.info('Loaded successful', images)
+                    })
             </code>
         </pre>
     </section>
@@ -614,13 +614,13 @@
                 // --------------------------------------------------
                 class AssetsLoader {
                     constructor() {
-                        this._images = new Set();
+                        this._images = new Set()
                     }
                     addImage(path /* string */) {
-                        return this._images.add(loadImage(path));
+                        return this._images.add(loadImage(path))
                     }
                     loadImages() {
-                        return Promise.all(this._images);
+                        return Promise.all(this._images)
                     }
                 }
             </code>
@@ -634,13 +634,13 @@
                 // --------------------------------------------------
                 class AssetsLoader {
                     constructor() {
-                        this._images = new Images();
+                        this._images = new Images()
                     }
                     addImage(path /* string */) {
-                        return this._images.add(path);
+                        return this._images.add(path)
                     }
                     loadImages() {
-                        return this._images.load();
+                        return this._images.load()
                     }
                 }
             </code>
@@ -654,10 +654,10 @@
                 // --------------------------------------------------
                 class Images extends Set {
                     add(path) {
-                        return super.add(loadImage(path));
+                        return super.add(loadImage(path))
                     }
                     load() {
-                        return Promise.all(this.keys());
+                        return Promise.all(this.keys())
                     }
                 }
             </code>
@@ -747,15 +747,15 @@
             <code>
                 // #3: API: How it works?
                 // --------------------------------------------------
-                let users = [{ name: 'Peter' }, { name: 'Kate' }];
-                let weakMap = new WeakMap();
+                let users = [{ name: 'Peter' }, { name: 'Kate' }]
+                let weakMap = new WeakMap()
 
-                weakMap.set(users[0], 'some info 1');
-                weakMap.set(users[1], 'some info 2');
+                weakMap.set(users[0], 'some info 1')
+                weakMap.set(users[1], 'some info 2')
 
-                console.log(weakMap.get(users[0])); // 'some info 1'
-                users.splice(0, 1);
-                console.log(weakMap.get(users[0])); // 'some info 2'
+                console.log(weakMap.get(users[0])) // 'some info 1'
+                users.splice(0, 1)
+                console.log(weakMap.get(users[0])) // 'some info 2'
             </code>
         </pre>
     </section>
@@ -801,7 +801,7 @@
             <code>
                 // #1: API: Simple API
                 // --------------------------------------------------
-                let weakSet = new WeakSet();
+                let weakSet = new WeakSet()
 
                 // Adding ONLY objects
                 weakSet.add([1])
@@ -820,14 +820,14 @@
             <code>
                 // #2: API: How it works?
                 // --------------------------------------------------
-                let users = [{ name: 'Peter' }, { name: 'Kate' }];
-                let weakSet = new WeakSet();
+                let users = [{ name: 'Peter' }, { name: 'Kate' }]
+                let weakSet = new WeakSet()
 
-                weakSet.add(users[0]);
-                weakSet.add(users[1]);
+                weakSet.add(users[0])
+                weakSet.add(users[1])
 
                 console.log(weakSet) // WeakSet {Object {name: "Kate"}, Object {name: "Peter"}}
-                users.splice(0, 1);
+                users.splice(0, 1)
                 console.log(weakSet) // WeakSet {Object {name: "Kate"}, Object {name: "Peter"}}
             </code>
         </pre>
@@ -1010,8 +1010,8 @@
                 // what happen here?
                 // [immutable type]
 
-                const object = {};
-                object.a = 1;
+                const object = {}
+                object.a = 1
                 console.log(object.a) // 1
                 // why we can do this?
                 // [immutable reference]
@@ -1044,7 +1044,7 @@
         <pre style="font-size: 43px;" class="language-javascript line-numbers">
             <code>
                 Object.observe(object, (changes) => {
-                    console.log(changes);
+                    console.log(changes)
                 })
 
                 // but today...
@@ -1058,15 +1058,15 @@
     <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-                let object = {};
+                let object = {}
                 object = new Proxy(object, {
                     set: (o, prop, value) => {
-                        console.warn(`${prop} is set to ${value}`);
-                        o[prop] = value;
+                        console.warn(`${prop} is set to ${value}`)
+                        o[prop] = value
                     },
                     get: (o, prop) => {
-                        console.warn(`${prop} is read`);
-                        return o[prop];
+                        console.warn(`${prop} is read`)
+                        return o[prop]
                     }
                 })
             </code>
