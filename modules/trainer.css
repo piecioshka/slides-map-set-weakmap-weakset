@@ -2,14 +2,15 @@
     position: absolute;
     right: 0;
     top: 0;
-    opacity: 0.5;
+    opacity: 1;
     z-index: -1;
+    width: 500px;
 }
 
 .trainer-header {
     position: absolute;
-    right: 150px;
-    top: 150px;
+    right: 20px;
+    top: 320px;
     font-size: 50px;
     font-weight: 900;
 }
