@@ -1,9 +1,4 @@
-# TODO (In polish)
-
-* przesłuchać nagrania
-* za mało zalet Map
-
-## Help
+# Help
 
 * BEFORE: zbadać (będąc w PM) ile można ustawić padding na slajdzie "compact"
 * BEFORE: ustawić zegarek: http://marcin93.github.com/timer
