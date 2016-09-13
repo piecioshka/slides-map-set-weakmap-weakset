@@ -1,6 +1,6 @@
 # slides-map-set-weakmap-weakset
 
-> :clipboard: Slides about new collections in JS (from ECMAScript 2015): Map, Set, WeakMap i WeakSet. 
+> :clipboard: Slides about new collections in JS: Map, Set, WeakMap i WeakSet. 
 
 ## Sources
 
