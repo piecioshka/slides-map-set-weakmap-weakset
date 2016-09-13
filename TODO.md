@@ -1,9 +1,6 @@
 # TODO (In polish)
 
-* zamiana `var` na `let`
-* zrobić projekt na wszystkie `snippets`
 * przesłuchać nagrania
-* dodać napis dot. tego, że jestem mentorem
 
 ## Help
 

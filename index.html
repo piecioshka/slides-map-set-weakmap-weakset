@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="modules/fullscreen-picture.css">
     <link rel="stylesheet" href="modules/tiny-text.css">
     <link rel="stylesheet" href="modules/cover-helper.css">
+    <link rel="stylesheet" href="modules/trainer.css">
 </head>
 <body class="shower list">
     <header class="caption">
@@ -46,7 +47,7 @@
 
         <div class="details">
             <!-- 1. Avatar -->
-            <img src="pictures/my-avatar.jpg" alt="Speaker"/>
+            <img src="pictures/fu-conf-200x200.jpg" alt="Speaker"/>
 
             <!-- 2. Speaker -->
             <h2>Piotr Kowalski</h2>
@@ -72,6 +73,9 @@
         <div class="who-am-i">
             <h2>Who am I?</h2>
             <h3><mark>Piotr Kowalski</mark></h3>
+
+            <img class="trainer-photo" src="pictures/trainer-1024x683.jpg" alt="Trainer"/>
+            <h3 class="trainer-header">Trainer</h3>
 
             <h3 itemprop="jobTitle">Kierownik Działu Aplikacji Webowych</h3>
 
@@ -100,9 +104,9 @@
 
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-                var MAP = {};
-                var foo = { name: 'foo' };
-                var bar = { name: 'bar' };
+                let MAP = {};
+                let foo = { name: 'foo' };
+                let bar = { name: 'bar' };
 
                 MAP[foo] = "Hello";
                 MAP[bar] = "World";
@@ -119,9 +123,9 @@
 
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
-                var MAP = new Map();
-                var foo = { name: 'foo' };
-                var bar = { name: 'bar' };
+                let MAP = new Map();
+                let foo = { name: 'foo' };
+                let bar = { name: 'bar' };
 
                 MAP.set(foo, "Hello");
                 MAP.set(bar, "World");
@@ -298,7 +302,7 @@
             <code>
                 // #1: API: Hashmap
                 // --------------------------------------------------
-                var map = new Map();
+                let map = new Map();
 
                 map.set('foo', 'bar')
                 // instead of: object[key] = value
@@ -372,7 +376,7 @@
                 // the same in arrays
 
                 // New loop for..of
-                for (var [key, value] of map.entries()) {
+                for (let [key, value] of map.entries()) {
                     map.delete(key) // true
                 }
             </code>
@@ -384,12 +388,12 @@
             <code>
                 // #6: API: WTF?
                 // --------------------------------------------------
-                var map = new Map()
+                let map = new Map()
                 map.set() // Map { undefined => undefined }
                 map.size // 1
 
                 // In arrays
-                var array = []
+                let array = []
                 array.push()
                 array.length // 0
             </code>
@@ -401,8 +405,8 @@
             <code>
                 // #7: API: "Holy" couple key/value
                 // --------------------------------------------------
-                var map = new Map();
-                var rand = Math.random();
+                let map = new Map();
+                let rand = Math.random();
 
                 map.set([1, 2, 3], Math.random())
                 map.set([1, 2, 3], Math.random())
@@ -419,8 +423,8 @@
             <code>
                 // #8: API: .. but unique key!
                 // --------------------------------------------------
-                var map = new Map();
-                var rand = Math.random();
+                let map = new Map();
+                let rand = Math.random();
 
                 map.set('item', Math.random())
                 map.set('item', rand) // overwrite previous
@@ -437,7 +441,7 @@
             <code>
                 // #1: Example: Array as key
                 // --------------------------------------------------
-                var map = new Map()
+                let map = new Map()
                 map.set(['win8', 'moz'], 'a').set(['xp', 'chrome'], 'b')
 
                 function check(collection, ...browsers) {
@@ -457,8 +461,8 @@
                 // #2: Example: Async iteration
                 // --------------------------------------------------
                 map.set({ foo: 1 }, 'a').set({ foo: 2 }, 'b')
-                var iterator = map.values() // {MapIterator}
-                var interval = setInterval(() => {
+                let iterator = map.values() // {MapIterator}
+                let interval = setInterval(() => {
                     let item = iterator.next()
                     if (item.done) {
                         clearInterval(interval)
@@ -481,7 +485,7 @@
                         return this;
                     }
                 }
-                var map = new MultiMap();
+                let map = new MultiMap();
                 map.set(['key', 'value'], ['key2', 'value2']);
                 // Map {"key" => "value", "key2" => "value2"}
             </code>
@@ -505,7 +509,7 @@
             <code>
                 // #2: API
                 // --------------------------------------------------
-                var set = new Set([1, 2, 3, 4])
+                let set = new Set([1, 2, 3, 4])
 
                 set.add(value) // instead of: array.push(value)
                 // NOT: set.set() // ??? undefined
@@ -540,7 +544,7 @@
             <code>
                 // #6: API: Simple iteration
                 // --------------------------------------------------
-                var set = new Set([1, 1, 2])
+                let set = new Set([1, 1, 2])
 
                 set.forEach((item) => {
                     console.log(item) // 1, 2
@@ -589,7 +593,7 @@
             <code>
                 // #1: Example: AssetsLoader: test case
                 // --------------------------------------------------
-                var al = new AssetsLoader();
+                let al = new AssetsLoader();
                 al.addImage('../assets/images/plants.jpg');
                 al.addImage('../assets/images/sky.jpg');
                 al.loadImages()
@@ -665,7 +669,7 @@
             <code>
                 // #3: Example: Remove duplicated item (Array)
                 // --------------------------------------------------
-                var array = [1, 2, 3, 1, 3]
+                let array = [1, 2, 3, 1, 3]
 
                 // Constructor expects another collection
                 [...new Set(array)] // [1, 2, 3]
@@ -678,7 +682,7 @@
             <code>
                 // #3: Example: Remove duplicated items (Map)
                 // --------------------------------------------------
-                var map = new Map()
+                let map = new Map()
                 map.set({ foo: 1 }, 'a').set({ foo: 2 }, 'b')
 
                 [...new Set(map.keys())]
@@ -707,8 +711,8 @@
             <code>
                 // #1: API: Simple API
                 // --------------------------------------------------
-                var weakMap = new WeakMap()
-                var key = { foo: 1 }
+                let weakMap = new WeakMap()
+                let key = { foo: 1 }
 
                 weakMap.set([1], 5) // WeakMap { [1] => 5 }
                 weakMap.set(key, 6) // WeakMap { [1] => 5, {foo: 1} => 6 }
@@ -725,7 +729,7 @@
             <code>
                 // #2: API: "Holy" couple key/value
                 // --------------------------------------------------
-                var weakMap = new WeakMap()
+                let weakMap = new WeakMap()
 
                 weakMap.set([1, 2], Math.random())
                 weakMap.set([1, 2], Math.random())
@@ -743,8 +747,8 @@
             <code>
                 // #3: API: How it works?
                 // --------------------------------------------------
-                var users = [{ name: 'Peter' }, { name: 'Kate' }];
-                var weakMap = new WeakMap();
+                let users = [{ name: 'Peter' }, { name: 'Kate' }];
+                let weakMap = new WeakMap();
 
                 weakMap.set(users[0], 'some info 1');
                 weakMap.set(users[1], 'some info 2');
@@ -797,7 +801,7 @@
             <code>
                 // #1: API: Simple API
                 // --------------------------------------------------
-                var weakSet = new WeakSet();
+                let weakSet = new WeakSet();
 
                 // Adding ONLY objects
                 weakSet.add([1])
@@ -816,8 +820,8 @@
             <code>
                 // #2: API: How it works?
                 // --------------------------------------------------
-                var users = [{ name: 'Peter' }, { name: 'Kate' }];
-                var weakSet = new WeakSet();
+                let users = [{ name: 'Peter' }, { name: 'Kate' }];
+                let weakSet = new WeakSet();
 
                 weakSet.add(users[0]);
                 weakSet.add(users[1]);

@@ -1,0 +1,15 @@
+.trainer-photo {
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.trainer-header {
+    position: absolute;
+    right: 150px;
+    top: 150px;
+    font-size: 50px;
+    font-weight: 900;
+}
