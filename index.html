@@ -71,7 +71,7 @@
 
     <section class="slide" itemscope itemtype="http://schema.org/Person">
         <div class="who-am-i">
-            <h2>Who am I?</h2>
+            <h2>Who am I&#x2753;</h2>
             <h3><mark class="trainer-name">Piotr Kowalski</mark></h3>
 
             <img class="trainer-photo" src="pictures/trainer-1024x683.jpg" alt="Trainer"/>
@@ -100,7 +100,7 @@
     </section>
 
     <section class="slide prism">
-        <h2>Can you explain what happens here?</h2>
+        <h2>Can you explain what happens here&#x2049;&#xFE0F;</h2>
 
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
@@ -136,7 +136,7 @@
     </section>
 
     <section class="slide">
-        <h2 class="shout">What collections<br/>do we have&#x2049;&#xFE0F;</h2>
+        <h2 class="shout shrink">What collections<br/>do we have&#x2049;&#xFE0F;</h2>
     </section>
 
     <section class="slide compact a-lot-stuff">
@@ -208,6 +208,10 @@
         </p>
     </section>
 
+    <section class="slide photo photo-1">
+        <h2 class="shout">Today's heros&#x2757;</h2>
+    </section>
+
     <section class="slide photo photo-7">
         <h2 class="shout"><code>Object</code><br/>(well known)</h2>
     </section>
@@ -230,6 +234,10 @@
 
     <section class="slide photo photo-3">
         <h2 class="shout"><code>WeakSet</code> &#x2728;</h2>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout shrink" style="font-size: 120px;">Who of you uses <code>Map</code> or <code>Set</code> every day&#x2049;&#xFE0F;</h2>
     </section>
 
     <section class="slide compact">
@@ -282,7 +290,7 @@
     </section>
 
     <section class="slide">
-        <h2 class="shout">Which collection is the best&#x2049;&#xFE0F;</h2>
+        <h2 class="shout shrink">Which collection is the best&#x2049;&#xFE0F;</h2>
     </section>
 
     <section class="slide">
@@ -291,6 +299,7 @@
 
     <section class="slide photo photo-12">
         <h2 class="shout"><code>Map</code></h2>
+
         <p class="note">
             The Map object is a simple key/value map. Any value (both objects and primitive values) may be used as either a key or a value.
             <strong>MDN @ 2016</strong>
@@ -437,6 +446,22 @@
     </section>
 
     <section class="slide prism">
+        <pre style="font-size: 30px;" class="language-javascript line-numbers">
+            <code>
+                // #9: API: Adding without coercing
+                // --------------------------------------------------
+
+                let map = new Map()
+
+                map.set(5, 'foo')
+                map.set("5", 'bar')
+
+                console.log(map.size) // 2
+            </code>
+        </pre>
+    </section>
+
+    <section class="slide prism">
         <pre style="font-size: 26px;" class="language-javascript line-numbers">
             <code>
                 // #1: Example: Array as key
@@ -493,11 +518,12 @@
     </section>
 
     <section class="slide">
-        <h2 class="shout">So, why <code>Map</code> is cool&#x2049;&#xFE0F;</h2>
+        <h2 class="shout shrink">So, why <code>Map</code> is cool&#x2049;&#xFE0F;</h2>
     </section>
 
     <section class="slide photo photo-9">
         <h2 class="shout"><code>Set</code></h2>
+
         <p class="note">
             The Set object lets you store unique values of any type, whether primitive values or object references.
             <strong>MDN @ 2016</strong>
@@ -549,22 +575,6 @@
                 set.forEach((item) => {
                     console.log(item) // 1, 2
                 })
-            </code>
-        </pre>
-    </section>
-
-    <section class="slide prism">
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-                // #8: API: Adding without coercing
-                // --------------------------------------------------
-
-                let set = new Set()
-
-                set.add(5)
-                set.add("5")
-
-                console.log(set.size) // 2
             </code>
         </pre>
     </section>
@@ -663,6 +673,9 @@
             </code>
         </pre>
     </section>
+    <section class="slide">
+        <h2 class="shout shrink">Which solutions is better&#x2049;&#xFE0F;</h2>
+    </section>
 
     <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
@@ -695,11 +708,12 @@
     </section>
 
     <section class="slide">
-        <h2 class="shout">So, why <code>Set</code> is cool&#x2049;&#xFE0F;</h2>
+        <h2 class="shout shrink">So, why <code>Set</code> is cool&#x2049;&#xFE0F;</h2>
     </section>
 
     <section class="slide photo photo-10">
         <h2 class="shout"><code>WeakMap</code></h2>
+
         <p class="note">
             The WeakMap object is a collection of key/value pairs in which the keys are weakly referenced. The keys must be objects and the values can be arbitrary values.
             <strong>MDN @ 2016</strong>
@@ -742,6 +756,10 @@
         </pre>
     </section>
 
+    <section class="slide">
+        <h2 class="shout shrink" style="font-size: 120px;">Why in <code>WeakMap</code> keys can ONLY be objects&#x2049;&#xFE0F;</h2>
+    </section>
+
     <section class="slide prism">
         <pre style="font-size: 30px;" class="language-javascript line-numbers">
             <code>
@@ -750,12 +768,12 @@
                 let users = [{ name: 'Peter' }, { name: 'Kate' }]
                 let weakMap = new WeakMap()
 
-                weakMap.set(users[0], 'some info 1')
-                weakMap.set(users[1], 'some info 2')
+                weakMap.set(users[0], 'foo')
+                weakMap.set(users[1], 'bar')
 
-                console.log(weakMap.get(users[0])) // 'some info 1'
+                console.log(weakMap.get(users[0])) // 'foo'
                 users.splice(0, 1)
-                console.log(weakMap.get(users[0])) // 'some info 2'
+                console.log(weakMap.get(users[0])) // 'bar'
             </code>
         </pre>
     </section>
@@ -765,7 +783,7 @@
     </section>
 
     <section class="slide">
-        <p class="above-cover">&#x261F;&#xFE0E; 2016-09-12 11:38:59.558 &#x261F;&#xFE0E;</p>
+        <p class="above-cover">&#x261F;&#xFE0E; 2016-09-12 11:38:43.753 &#x261F;&#xFE0E;</p>
         <img class="cover fullscreen-picture" src="pictures/weakmap/gc-activate-log.png" alt="">
         <p class="below-cover">&#x261D;&#xFE0E; 2016-09-12 11:38:59.656 &#x261D;&#xFE0E;</p>
     </section>
@@ -786,11 +804,12 @@
     </section>
 
     <section class="slide">
-        <h2 class="shout">So, why <code>WeakMap</code> is cool&#x2049;&#xFE0F;</h2>
+        <h2 class="shout shrink">So, why <code>WeakMap</code> is cool&#x2049;&#xFE0F;</h2>
     </section>
 
     <section class="slide photo photo-3">
         <h2 class="shout"><code>WeakSet</code></h2>
+
         <p class="note">
             The WeakSet object lets you store weakly held objects in a collection. <strong>MDN @ 2016</strong>
         </p>
@@ -838,7 +857,7 @@
     </section>
 
     <section class="slide">
-        <p class="above-cover">&#x261F;&#xFE0E; 2016-09-12 15:13:17.336 &#x261F;&#xFE0E;</p>
+        <p class="above-cover">&#x261F;&#xFE0E; 2016-09-12 15:13:09.329 &#x261F;&#xFE0E;</p>
         <img class="cover fullscreen-picture" src="pictures/weakset/gc-activate-log.png" alt="">
         <p class="below-cover">&#x261D;&#xFE0E; 2016-09-12 15:13:17.837 &#x261D;&#xFE0E;</p>
     </section>
@@ -856,7 +875,37 @@
     </section>
 
     <section class="slide">
-        <h2 class="shout">So, why <code>WeakSet</code> is cool&#x2049;&#xFE0F;</h2>
+        <h2 class="shout shrink">So, why <code>WeakSet</code> is cool&#x2049;&#xFE0F;</h2>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout shrink">Who noticed similarities&#x2049;&#xFE0F;</h2>
+    </section>
+
+    <section class="slide compact">
+        <h2>Similarities</h2>
+
+        <ul style="font-size: 35px">
+            <li><code>Map</code> &amp; <code>Set</code> can use primitives and objects as keys</li>
+            <li><code>Set</code> &amp; <code>WeakSet</code> has unique keys</li>
+            <li><code>WeakMap</code> &amp; <code>WeakSet</code> can use ONLY objects as keys</li>
+            <li><code>WeakMap</code> &amp; <code>WeakSet</code> don't have <code>size</code> & <code>forEach</code> property</li>
+            <li><code>WeakMap</code> &amp; <code>WeakSet</code> held items weakly, so GC will remove its when are unused</li>
+        </ul>
+    </section>
+
+    <section class="slide prism">
+        <h2>Differences</h2>
+
+        <pre style="font-size: 36px;" class="language-javascript line-numbers">
+            <code>
+                // Symbol(Symbol.toStringTag)
+                String(new Map) === "[object Map]"
+                String(new Set) === "[object Set]"
+                String(new WeakMap) === "[object WeakMap]"
+                String(new WeakSet) === "[object WeakSet]"
+            </code>
+        </pre>
     </section>
 
     <section class="slide compact">
@@ -892,35 +941,6 @@
                 <td><code>202,026</code> ops/sec ±1.91% (82 runs sampled)</td>
             </tr>
         </table>
-    </section>
-
-    <section class="slide">
-        <h2 class="shout">Who noticed similarities&#x2049;&#xFE0F;</h2>
-    </section>
-
-    <section class="slide compact">
-        <h2>Similarities</h2>
-
-        <ul>
-            <li><code>Map</code> &amp; <code>Set</code> can use primitives and objects as keys</li>
-            <li><code>Set</code> &amp; <code>WeakSet</code> has unique keys</li>
-            <li><code>WeakMap</code> &amp; <code>WeakSet</code> can use ONLY objects as keys</li>
-            <li><code>WeakMap</code> &amp; <code>WeakSet</code> don't have <code>size</code> & <code>forEach</code> property</li>
-            <li><code>WeakMap</code> &amp; <code>WeakSet</code> held items weakly, so GC will remove its when are unused</li>
-        </ul>
-    </section>
-
-    <section class="slide prism">
-        <h2>Differences</h2>
-        <pre style="font-size: 30px;" class="language-javascript line-numbers">
-            <code>
-                // Symbol(Symbol.toStringTag)
-                String(new Map) === "[object Map]"
-                String(new Set) === "[object Set]"
-                String(new WeakMap) === "[object WeakMap]"
-                String(new WeakSet) === "[object WeakSet]"
-            </code>
-        </pre>
     </section>
 
     <section class="slide compact">
@@ -1071,6 +1091,10 @@
                 })
             </code>
         </pre>
+    </section>
+
+    <section class="slide">
+        <img class="cover fullscreen-picture" src="pictures/proxy/screenshot-with-proxy.png" alt="Example of Proxy">
     </section>
 
     <section class="slide prism">
