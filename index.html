@@ -770,12 +770,12 @@
                 let users = [{ name: 'Peter' }, { name: 'Kate' }]
                 let weakMap = new WeakMap()
 
-                weakMap.set(users[0], 'foo')
-                weakMap.set(users[1], 'bar')
+                weakMap.set(users[0], 'some text 1')
+                weakMap.set(users[1], 'some text 2')
 
-                console.log(weakMap.get(users[0])) // 'foo'
+                console.log(weakMap.get(users[0])) // 'some text 1'
                 users.splice(0, 1)
-                console.log(weakMap.get(users[0])) // 'bar'
+                console.log(weakMap.get(users[0])) // 'some text 2'
             </code>
         </pre>
     </section>
