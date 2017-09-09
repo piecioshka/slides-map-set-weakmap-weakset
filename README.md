@@ -2,7 +2,7 @@
 
 > :clipboard: Slides about new collections in JS: Map, Set, WeakMap i WeakSet. 
 
-![Logo](/pictures/logo/warsawjs-logo-light.png)
+![Logo](./vendors/shower-warsawjs/images/logo-white-400x400.jpg)
 
 ## Sources
 
@@ -27,14 +27,10 @@
 * WeakSet: http://kangax.github.io/compat-table/es6/#test-WeakSet
 * WeakMap: http://kangax.github.io/compat-table/es6/#test-WeakMap
 
-### Code highlighting
+## Slides engine: [shower.js](https://shwr.me/)
 
-* Prism.js: http://prismjs.com/download.html
-
-### Presentation mechanism
-
-* shower.js: https://shwr.me/
-* use custom style - [warsawjs-slides-template](https://github.com/warsawjs/warsawjs-slides-template)
+* Use WarsawJS's template: [warsawjs-slides-template](https://github.com/warsawjs/warsawjs-slides-template)
+* Code highlighting: [prism.js](http://prismjs.com/download.html)
 
 ## License
 
