@@ -20,7 +20,7 @@
 * WeakMap: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap
 * WeakSet: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet
 
-## Compatibility table
+### Compatibility table
 
 * Set: http://kangax.github.io/compat-table/es6/#test-Set
 * Map: http://kangax.github.io/compat-table/es6/#test-Map
