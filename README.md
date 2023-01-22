@@ -1,8 +1,12 @@
 # slides-map-set-weakmap-weakset
 
-> :clipboard: Slides about new collections in JS: Map, Set, WeakMap i WeakSet. 
+:clipboard: Slides about new collections in JS: Map, Set, WeakMap i WeakSet. 
 
 ![Logo](./vendors/shower-warsawjs/images/logo-white-400x400.jpg)
+
+## Preview 🎉
+
+https://piecioshka.github.io/slides-map-set-weakmap-weakset/
 
 ## Sources
 
