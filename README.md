@@ -38,4 +38,4 @@ https://piecioshka.github.io/slides-map-set-weakmap-weakset/
 
 ## License
 
-[The MIT License](http://piecioshka.mit-license.org) @ 2016
+[The MIT License](http://piecioshka.mit-license.org) @ 2026
